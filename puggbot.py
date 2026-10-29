@@ -110,7 +110,7 @@ class Question:
         else:
             print("no, bad")
 
-        print()
+        input("Press enter to continue")
 
         print(self.explanation)
         return user_guess in correct
@@ -131,6 +131,27 @@ class Answer:
         )
 
 
+def load_from_api(api_key: str, quiz_id: str) -> Quiz:
+
+    response = requests.get(
+        f"https://quizapi.io/api/v1/quizzes/{quiz_id}",
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        },
+    )
+    print(response)
+    if response.status_code != 200:
+        print(response.status_code)
+        sys.exit(0)
+
+    data = response.json()
+    # print(f"Found {data['total']} quizzes")
+    print(data["data"])
+
+    return Quiz.from_dict(data["data"])
+
+
 def load_from_file():
     with open(JSON_FILE, "r") as file:
         root_object = json.load(file)
@@ -141,7 +162,7 @@ def load_from_file():
     return None
 
 
-def load_from_api():
+def load_from_api_old():
     # TODO
     load_dotenv()
 
