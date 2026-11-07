@@ -10,6 +10,11 @@ from dotenv import load_dotenv
 JSON_FILE = "./python-quiz.json"
 CLEAR_SCREEN = "\033[2J"
 
+RED = "\033[41m"
+GREEN = "\033[42m"
+YELLOW = "\033[43m"
+RESET = "\033[0m"
+
 
 @dataclass
 class Quiz:
@@ -96,20 +101,41 @@ class Question:
 
     def pose(self) -> bool:
         print(self.text, end="\n\n")
+
         correct = []
         shuffle(self.answers)
+
         for i, answer in enumerate(self.answers):
+            answer_number = i + 1
             if answer.isCorrect:
-                correct.append(i + 1)
-            print(i + 1, answer.text)
+                correct.append(answer_number)
+            print(f"{answer_number}: {answer.text}")
 
         print()
-        user_guess = int(input("Guess an answer "))
-        if user_guess in correct:
-            print("yes correct")
-        else:
-            print("no, bad")
+        alternatives = "/".join([str(i) for i in range(1, len(self.answers) + 1)])
+        user_guess = int(input(f"Guess an answer ({alternatives}): "))
 
+        print(CLEAR_SCREEN)
+
+        # Feedback
+        if user_guess in correct:
+            print("CORRECT")
+        else:
+            print("WRONG")
+
+        print()
+        for i, answer in enumerate(self.answers):
+            answer_number = i + 1
+            answer_text = f"{answer_number}. {answer.text}"
+            if user_guess == answer_number:
+                if answer_number in correct:
+                    print(GREEN + answer_text + RESET)
+                else:
+                    print(RED + answer_text + RESET)
+            else:
+                print(answer_number, answer.text)
+
+        print()
         input("Press enter to continue")
 
         print(self.explanation)

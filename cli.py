@@ -9,29 +9,19 @@ from puggbot import load_from_api
 
 
 def get_categories() -> dict:
-    response = requests.get(
-        "https://quizapi.io/api/v1/categories",
-        headers={
-            "Content-Type": "application/json",
-        },
-        params={
-            "topic": "python",
-            "limit": 5,
-        },
-    )
+    url = "https://quizapi.io/api/v1/categories"
+    headers = {"Content-Type": "application/json"}
+    response = requests.get(url, headers=headers)
     data = response.json()
     return data
 
 
 def search_quiz(api_key: str, search_term: str) -> dict:
+    url = "https://quizapi.io/api/v1/quizzes"
+    params = {"topic": search_term, "limit": 50, "sort": "popular"}
+    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
 
-    response = requests.get(
-        f"https://quizapi.io/api/v1/quizzes?topic={search_term}&sort=popular&limit=50",
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}",
-        },
-    )
+    response = requests.get(url, params=params, headers=headers)
     data = response.json()
     return data["data"]
 
@@ -113,7 +103,7 @@ def main():
             quizzes = search_quiz(quizapi_key, search_term)
             for quiz in quizzes:
                 print(
-                    f"{quiz["title"]}  {quiz["difficulty"]}, plays: {quiz["plays"]}, question count: {quiz["questionCount"]} id: {quiz["id"]}"
+                    f"{quiz["title"]}  {quiz["difficulty"]}, plays: {quiz["plays"]}, q's: {quiz["questionCount"]} tags: {" ".join(quiz["tags"])} id: {quiz["id"]}"
                 )
 
 
