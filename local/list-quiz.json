@@ -1,0 +1,323 @@
+{
+  "success": true,
+  "data": {
+    "id": "cmnzsb4xx004hruuth22qe3k3",
+    "title": "Python Lists, Tuples & Sequences",
+    "description": "Dive into list operations, tuple immutability, slicing, and sequence unpacking.",
+    "category": "Python",
+    "categoryId": "cmmoua9ar0003ywutf6xv72kt",
+    "categoryName": "Python",
+    "categorySlug": "python",
+    "topic": "Programming",
+    "topicSlug": "programming",
+    "difficulty": "MEDIUM",
+    "tags": [
+      "python"
+    ],
+    "questionCount": 10,
+    "plays": 9,
+    "slug": null,
+    "questions": [
+      {
+        "id": "cmnzsig6d00mxruutj7gpr2p5",
+        "text": "What is the output of the following code? ```python for i in range(5): if i == 3: break print(i, end=' ') else: print('done') ```",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "HARD",
+        "explanation": "The `for...else` construct runs the `else` block only if the loop completes without hitting a `break`. Here, `break` is triggered when `i == 3`, so `else` is skipped. The loop prints 0, 1, 2 before breaking.",
+        "order": 1,
+        "answers": [
+          {
+            "id": "cmnzsig6t00myruutuhroizhx",
+            "text": "0 1 2 done",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig6t00mzruuteqax58ox",
+            "text": "0 1 2 3",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig6t00n0ruut8fffy8yi",
+            "text": "0 1 2",
+            "isCorrect": true
+          },
+          {
+            "id": "cmnzsig6t00n1ruut61iavz0u",
+            "text": "0 1 2 3 done",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmnzsig6w00n2ruut9dwshioo",
+        "text": "What does this code print? ```python count = 0 while count 7: break print(count) ```",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "HARD",
+        "explanation": "The loop increments count, skips multiples of 3 via `continue`, and breaks when count > 7. After count becomes 8 (not a multiple of 3), the `break` triggers. So `count` is 8 when printed.",
+        "order": 2,
+        "answers": [
+          {
+            "id": "cmnzsig6z00n3ruutrfmahs4z",
+            "text": "7",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig7000n4ruut9zji6nlg",
+            "text": "9",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig7000n5ruutmeytk3wt",
+            "text": "10",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig7000n6ruuto003vepf",
+            "text": "8",
+            "isCorrect": true
+          }
+        ]
+      },
+      {
+        "id": "cmnzsig7300n7ruutuuwzrv2b",
+        "text": "What is the output of the following code? ```python x = 15 result = 'fizzbuzz' if x % 15 == 0 else 'fizz' if x % 3 == 0 else 'buzz' if x % 5 == 0 else str(x) print(result) ```",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "HARD",
+        "explanation": "This is a chained ternary expression. Since 15 % 15 == 0 is True, the first condition matches and 'fizzbuzz' is assigned to `result`.",
+        "order": 3,
+        "answers": [
+          {
+            "id": "cmnzsig7a00n8ruutmh3sv503",
+            "text": "'fizz'",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig7a00n9ruut13pb2oz7",
+            "text": "'buzz'",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig7a00naruutk13hqnf9",
+            "text": "'fizzbuzz'",
+            "isCorrect": true
+          },
+          {
+            "id": "cmnzsig7a00nbruut9thieosx",
+            "text": "'15'",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmnzsig7h00ncruutzae6sk1b",
+        "text": "What does this Python 3.8+ code print? ```python data = [1, 2, 3, 4, 5, 6, 7, 8] filtered = [y for x in data if (y := x ** 2) > 10] print(filtered) ```",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "HARD",
+        "explanation": "The walrus operator `:=` assigns `x ** 2` to `y` and simultaneously uses it in the condition `> 10`. Values of x² that exceed 10 are: 16 (x=4), 25 (x=5), 36 (x=6), 49 (x=7), 64 (x=8). So `filtered` is [16, 25, 36, 49, 64].",
+        "order": 4,
+        "answers": [
+          {
+            "id": "cmnzsig7k00ndruutdohg1ap2",
+            "text": "[16, 25, 36, 49, 64]",
+            "isCorrect": true
+          },
+          {
+            "id": "cmnzsig7k00neruutt6vymk84",
+            "text": "[4, 5, 6, 7, 8]",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig7k00nfruut0ighdlxi",
+            "text": "[1, 4, 9, 16, 25, 36, 49, 64]",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig7k00ngruutptk589c1",
+            "text": "Raises a SyntaxError",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmnzsig7p00nhruutmyzru3p6",
+        "text": "What is the output of this code? ```python for i in range(3): pass else: print(i) ```",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "HARD",
+        "explanation": "The `pass` statement does nothing, and the loop variable `i` retains its last value after the loop ends. Since the loop completes normally (no `break`), the `else` block runs. The last value of `i` from `range(3)` is 2.",
+        "order": 5,
+        "answers": [
+          {
+            "id": "cmnzsig7s00niruutu2mo142l",
+            "text": "Raises a NameError because `i` is not defined",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig7s00njruutywaikslv",
+            "text": "2",
+            "isCorrect": true
+          },
+          {
+            "id": "cmnzsig7s00nkruutighm5md6",
+            "text": "3",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig7s00nlruut2m2u4cb4",
+            "text": "0",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmnzsig7v00nmruutb9m08gru",
+        "text": "What does the following function return? ```python def greet(name, greeting='Hello'): return f'{greeting}, {name}!' result = greet('Alice') ```",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "explanation": "When `greeting` is not provided, Python uses the default parameter value `'Hello'`. So `greet('Alice')` returns `'Hello, Alice!'`.",
+        "order": 6,
+        "answers": [
+          {
+            "id": "cmnzsig8000nnruutlc62himg",
+            "text": "'Hello, Alice!'",
+            "isCorrect": true
+          },
+          {
+            "id": "cmnzsig8000noruut6u40xnsb",
+            "text": "'Alice, Hello!'",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig8000npruutdoee3mo1",
+            "text": "A TypeError is raised",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig8100nqruutp9mi9a78",
+            "text": "'Hello, name!'",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmnzsig8300nrruuty86gwdcw",
+        "text": "What is the output of the following code? ```python def accumulate(*args): return sum(args) print(accumulate(1, 2, 3, 4)) ```",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "explanation": "`*args` collects all positional arguments into a tuple. `sum((1, 2, 3, 4))` returns `10`.",
+        "order": 7,
+        "answers": [
+          {
+            "id": "cmnzsig8600nsruutv3tdv0kb",
+            "text": "[1, 2, 3, 4]",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig8700ntruutmqe6vooz",
+            "text": "10",
+            "isCorrect": true
+          },
+          {
+            "id": "cmnzsig8700nuruutoo9srp6c",
+            "text": "(1, 2, 3, 4)",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig8700nvruutfzvrsnwa",
+            "text": "A TypeError is raised",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmnzsig8b00nwruuto2u1zg81",
+        "text": "Which of the following correctly describes `**kwargs` in a Python function signature?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "explanation": "`**kwargs` collects any extra keyword arguments passed to the function into a dictionary, where keys are argument names and values are argument values.",
+        "order": 8,
+        "answers": [
+          {
+            "id": "cmnzsig8f00nxruutqwkpx60o",
+            "text": "It collects positional arguments into a list",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig8f00nyruutsybsemp1",
+            "text": "It enforces keyword-only arguments",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig8f00nzruut622a6wqr",
+            "text": "It collects extra keyword arguments into a dictionary",
+            "isCorrect": true
+          },
+          {
+            "id": "cmnzsig8f00o0ruutbnhn4lux",
+            "text": "It unpacks a dictionary into positional arguments",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmnzsig8t00o1ruutt45b3jyj",
+        "text": "What does this recursive function return when called with `factorial(5)`? ```python def factorial(n): if n <= 1: return 1 return n * factorial(n - 1) ```",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "explanation": "`factorial(5)` computes `5 * 4 * 3 * 2 * 1 = 120`. The base case returns `1` when `n <= 1`.",
+        "order": 9,
+        "answers": [
+          {
+            "id": "cmnzsig8y00o2ruutfn7h79et",
+            "text": "25",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig8y00o3ruut7c8c4hm2",
+            "text": "24",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig8y00o4ruut3hq4mie7",
+            "text": "5",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig8y00o5ruutn115zfpb",
+            "text": "120",
+            "isCorrect": true
+          }
+        ]
+      },
+      {
+        "id": "cmnzsig9100o6ruutfy6x3vm2",
+        "text": "What happens when a Python function has a mutable default argument? ```python def append_item(item, lst=[]): lst.append(item) return lst print(append_item(1)) print(append_item(2)) ```",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "explanation": "Mutable default arguments are created once when the function is defined, not each time it's called. Both calls share the same list, so the second call sees the list already containing `1` and appends `2`, resulting in `[1, 2]`.",
+        "order": 10,
+        "answers": [
+          {
+            "id": "cmnzsig9400o7ruut4zlrpt60",
+            "text": "[1] then [1, 2]",
+            "isCorrect": true
+          },
+          {
+            "id": "cmnzsig9400o8ruutt52d6ddb",
+            "text": "[1] then [2]",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig9400o9ruutr1zbqkf4",
+            "text": "[1, 2] then [1, 2]",
+            "isCorrect": false
+          },
+          {
+            "id": "cmnzsig9400oaruut4lkotclq",
+            "text": "A TypeError on the second call",
+            "isCorrect": false
+          }
+        ]
+      }
+    ]
+  }
+}

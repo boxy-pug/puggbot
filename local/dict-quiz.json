@@ -1,0 +1,254 @@
+{
+  "success": true,
+  "data": {
+    "id": "cmmdjgdzb004autgrtn29hcbk",
+    "title": "Python Data Structures",
+    "description": "Explore Python's built-in data structures including lists, tuples, dictionaries, sets, and their methods. Covers comprehensions, performance characteristics, and common patterns.",
+    "category": "Programming",
+    "categoryId": "cmmoua9a30001ywutm95tppwv",
+    "categoryName": "JavaScript",
+    "categorySlug": "javascript",
+    "topic": "Programming",
+    "topicSlug": "programming",
+    "difficulty": "MEDIUM",
+    "tags": [
+      "python",
+      "data-structures"
+    ],
+    "questionCount": 8,
+    "plays": 2371,
+    "slug": null,
+    "questions": [
+      {
+        "id": "cmmdjgdzb004butgr0bh2g91r",
+        "text": "What is the key difference between a list and a tuple in Python?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "explanation": "Lists are mutable (can be modified after creation) while tuples are immutable (cannot be changed). Tuples are hashable (can be used as dictionary keys), slightly faster, and use less memory. Use tuples for fixed collections of items and lists when you need to add, remove, or modify elements.",
+        "order": 1,
+        "answers": [
+          {
+            "id": "cmmdjgdzb004cutgru9yr0jrk",
+            "text": "Lists are mutable; tuples are immutable",
+            "isCorrect": true
+          },
+          {
+            "id": "cmmdjgdzb004dutgrbaxde0mh",
+            "text": "Lists can hold strings; tuples can only hold numbers",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmdjgdzb004eutgrglwdx3tp",
+            "text": "Tuples are faster for all operations",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmdjgdzb004futgrvx5aa9zp",
+            "text": "Lists use {} syntax; tuples use [] syntax",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmmdjgdzb004gutgrl5qvhng1",
+        "text": "What is the time complexity of accessing a dictionary value by key?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "explanation": "Python dictionaries are implemented as hash tables, providing O(1) average-case time complexity for lookups, insertions, and deletions. In the worst case (many hash collisions), it degrades to O(n), but Python's hash function is designed to minimize collisions. This makes dictionaries one of the most efficient data structures for key-value lookups.",
+        "order": 2,
+        "answers": [
+          {
+            "id": "cmmdjgdzb004hutgrrbufm56a",
+            "text": "O(1) average case",
+            "isCorrect": true
+          },
+          {
+            "id": "cmmdjgdzb004iutgrk4u23unr",
+            "text": "O(n)",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmdjgdzb004jutgrzc20vj45",
+            "text": "O(log n)",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmdjgdzb004kutgrzyljahto",
+            "text": "O(n^2)",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmmdjgdzb004lutgrj1nfis1g",
+        "text": "What does the set data type guarantee about its elements?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "explanation": "Sets in Python are unordered collections of unique, hashable elements. They automatically remove duplicates and support mathematical set operations like union, intersection, difference, and symmetric difference. Elements must be hashable, so you can't put lists or dicts in a set, but you can use tuples and frozensets.",
+        "order": 3,
+        "answers": [
+          {
+            "id": "cmmdjgdzb004mutgre4xj2kg3",
+            "text": "All elements are unique (no duplicates)",
+            "isCorrect": true
+          },
+          {
+            "id": "cmmdjgdzb004nutgrx5qzz87u",
+            "text": "Elements are always sorted",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmdjgdzb004outgr88rtysrm",
+            "text": "Elements maintain insertion order",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmdjgdzb004putgr6vgprw3u",
+            "text": "Elements are always strings",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmmdjgdzb004qutgrpred46t0",
+        "text": "What is a list comprehension in Python?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "explanation": "A list comprehension is a concise way to create lists using a single line of code. The syntax is [expression for item in iterable if condition]. For example, [x**2 for x in range(10) if x % 2 == 0] creates a list of squares of even numbers from 0 to 9. List comprehensions are generally faster than equivalent for loops because they are optimized at the C level in CPython.",
+        "order": 4,
+        "answers": [
+          {
+            "id": "cmmdjgdzb004rutgrybyzdi5g",
+            "text": "A concise syntax for creating lists: [expression for item in iterable]",
+            "isCorrect": true
+          },
+          {
+            "id": "cmmdjgdzb004sutgrm30miehc",
+            "text": "A way to sort lists alphabetically",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmdjgdzb004tutgruul71624",
+            "text": "A method that compresses list data",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmdjgdzb004uutgri1i48lu3",
+            "text": "A tool for comparing two lists",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmmdjgdzb004vutgrzprnuini",
+        "text": "Python dictionaries maintain insertion order (Python 3.7+).",
+        "type": "TRUE_FALSE",
+        "difficulty": "MEDIUM",
+        "explanation": "As of Python 3.7, dictionaries are guaranteed to maintain insertion order (this was an implementation detail in CPython 3.6 and became part of the language specification in 3.7). When you iterate over a dictionary, items are returned in the order they were inserted. However, dictionaries are still primarily used for key-based lookups, not ordered sequences.",
+        "order": 5,
+        "answers": [
+          {
+            "id": "cmmdjgdzb004wutgr88wie6zb",
+            "text": "True",
+            "isCorrect": true
+          },
+          {
+            "id": "cmmdjgdzb004xutgritck7omv",
+            "text": "False",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmmdjgdzb004yutgrvjq87s91",
+        "text": "What is the difference between .append() and .extend() for lists?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "explanation": "append() adds its argument as a single element to the end of the list, regardless of the argument's type. extend() iterates over its argument and adds each element individually. For example, [1,2].append([3,4]) gives [1,2,[3,4]], while [1,2].extend([3,4]) gives [1,2,3,4]. Use append for single items and extend to merge iterables.",
+        "order": 6,
+        "answers": [
+          {
+            "id": "cmmdjgdzb004zutgrhu5v9l20",
+            "text": "append() adds one element; extend() adds each element from an iterable",
+            "isCorrect": true
+          },
+          {
+            "id": "cmmdjgdzb0050utgryj0zbl9r",
+            "text": "append() adds to the end; extend() adds to the beginning",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmdjgdzb0051utgrynlvq824",
+            "text": "extend() is faster than append()",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmdjgdzb0052utgrn5k6bq99",
+            "text": "They do the same thing",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmmdjgdzb0053utgravp6buav",
+        "text": "What does collections.defaultdict do?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "HARD",
+        "explanation": "defaultdict is a dictionary subclass that calls a factory function to supply missing values when a key is accessed that doesn't exist. Instead of raising a KeyError, it creates a default value using the provided callable. For example, defaultdict(list) creates an empty list for new keys, and defaultdict(int) creates 0. This is extremely useful for grouping, counting, and accumulating patterns.",
+        "order": 7,
+        "answers": [
+          {
+            "id": "cmmdjgdzb0054utgr53gj1m3s",
+            "text": "Provides a default value for missing keys instead of raising KeyError",
+            "isCorrect": true
+          },
+          {
+            "id": "cmmdjgdzb0055utgr0jtfmf09",
+            "text": "Sorts dictionary keys by default",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmdjgdzb0056utgrn13t8sra",
+            "text": "Limits dictionary size to a default maximum",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmdjgdzb0057utgrs3f6ikjd",
+            "text": "Creates a read-only dictionary with defaults",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmmdjgdzb0058utgr3jtdqcs7",
+        "text": "What is the difference between a shallow copy and a deep copy of a list?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "HARD",
+        "explanation": "A shallow copy (list.copy(), list[:], or copy.copy()) creates a new list but the elements inside are still references to the same objects. A deep copy (copy.deepcopy()) creates a new list AND recursively copies all nested objects. This matters for nested structures: with a shallow copy, modifying a nested list affects both copies; with a deep copy, the copies are fully independent.",
+        "order": 8,
+        "answers": [
+          {
+            "id": "cmmdjgdzb0059utgrq75zq2mn",
+            "text": "Shallow copy shares nested references; deep copy recursively duplicates all nested objects",
+            "isCorrect": true
+          },
+          {
+            "id": "cmmdjgdzb005autgrtxg9lf1o",
+            "text": "Shallow copy is faster; deep copy produces the same result",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmdjgdzb005butgr18dvxw1m",
+            "text": "Deep copy only works with dictionaries",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmdjgdzb005cutgrzzczbbdz",
+            "text": "Shallow copy creates a string representation; deep copy creates a binary one",
+            "isCorrect": false
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cmmdjgdzb004autgrtn29hcbk",
+      "title": "Python Data Structures",
+      "description": "Explore Python's built-in data structures including lists, tuples, dictionaries, sets, and their methods. Covers comprehensions, performance characteristics, and common patterns.",
+      "category": "Programming",
+      "categoryId": "cmmoua9a30001ywutm95tppwv",
+      "categoryName": "JavaScript",
+      "categorySlug": "javascript",
+      "topic": "Programming",
+      "topicSlug": "programming",
+      "difficulty": "MEDIUM",
+      "tags": [
+        "python",
+        "data-structures"
+      ],
+      "questionCount": 8,
+      "plays": 2369,
+      "slug": null
+    },
+    {
+      "id": "cmmnfiduw0000l1ut0x5mz5sv",
+      "title": "Python Basics",
+      "description": "Foundational Python concepts including data types, control flow, list comprehensions, and built-in functions.",
+      "category": "Programming",
+      "categoryId": "cmmoua9a30001ywutm95tppwv",
+      "categoryName": "JavaScript",
+      "categorySlug": "javascript",
+      "topic": "Programming",
+      "topicSlug": "programming",
+      "difficulty": "EASY",
+      "tags": [
+        "python",
+        "beginner"
+      ],
+      "questionCount": 4,
+      "plays": 129,
+      "slug": null
+    },
+    {
+      "id": "cmnzsbcek00buruut4grucvi1",
+      "title": "Python Generators & Concurrency",
+      "description": "Generators, yield from, itertools, asyncio basics, and concurrent patterns.",
+      "category": "Python",
+      "categoryId": "cmmoua9ar0003ywutf6xv72kt",
+      "categoryName": "Python",
+      "categorySlug": "python",
+      "topic": "Programming",
+      "topicSlug": "programming",
+      "difficulty": "HARD",
+      "tags": [
+        "python"
+      ],
+      "questionCount": 10,
+      "plays": 10,
+      "slug": null
+    },
+    {
+      "id": "cmnzsb4xx004hruuth22qe3k3",
+      "title": "Python Lists, Tuples & Sequences",
+      "description": "Dive into list operations, tuple immutability, slicing, and sequence unpacking.",
+      "category": "Python",
+      "categoryId": "cmmoua9ar0003ywutf6xv72kt",
+      "categoryName": "Python",
+      "categorySlug": "python",
+      "topic": "Programming",
+      "topicSlug": "programming",
+      "difficulty": "MEDIUM",
+      "tags": [
+        "python"
+      ],
+      "questionCount": 10,
+      "plays": 9,
+      "slug": null
+    },
+    {
+      "id": "cmnzsb99h008wruut2o8fiyy5",
+      "title": "Python OOP & Decorators",
+      "description": "Classes, inheritance, dunder methods, decorators, and the descriptor protocol.",
+      "category": "Python",
+      "categoryId": "cmmoua9ar0003ywutf6xv72kt",
+      "categoryName": "Python",
+      "categorySlug": "python",
+      "topic": "Programming",
+      "topicSlug": "programming",
+      "difficulty": "HARD",
+      "tags": [
+        "python"
+      ],
+      "questionCount": 9,
+      "plays": 8,
+      "slug": null
+    },
+    {
+      "id": "cmnzsb6dt005yruutlfbo45q4",
+      "title": "Python Dictionaries & Sets",
+      "description": "Work with dicts, sets, frozensets — lookups, comprehensions, and set operations.",
+      "category": "Python",
+      "categoryId": "cmmoua9ar0003ywutf6xv72kt",
+      "categoryName": "Python",
+      "categorySlug": "python",
+      "topic": "Programming",
+      "topicSlug": "programming",
+      "difficulty": "MEDIUM",
+      "tags": [
+        "python"
+      ],
+      "questionCount": 9,
+      "plays": 7,
+      "slug": null
+    },
+    {
+      "id": "cmnzsbb0g00adruutijwot9b7",
+      "title": "Python Error Handling & Modules",
+      "description": "Exception handling, custom exceptions, imports, packages, and the module system.",
+      "category": "Python",
+      "categoryId": "cmmoua9ar0003ywutf6xv72kt",
+      "categoryName": "Python",
+      "categorySlug": "python",
+      "topic": "Programming",
+      "topicSlug": "programming",
+      "difficulty": "MEDIUM",
+      "tags": [
+        "python"
+      ],
+      "questionCount": 10,
+      "plays": 7,
+      "slug": null
+    },
+    {
+      "id": "cmnzsb0h70002ruutiaqxrmd2",
+      "title": "Python Basics & Syntax",
+      "description": "Test your knowledge of Python fundamentals — indentation, variables, comments, and basic I/O.",
+      "category": "Python",
+      "categoryId": "cmmoua9ar0003ywutf6xv72kt",
+      "categoryName": "Python",
+      "categorySlug": "python",
+      "topic": "Programming",
+      "topicSlug": "programming",
+      "difficulty": "EASY",
+      "tags": [
+        "python"
+      ],
+      "questionCount": 9,
+      "plays": 6,
+      "slug": null
+    },
+    {
+      "id": "cmnzsbdsk00dbruutok0r3z10",
+      "title": "Python Advanced Patterns & Testing",
+      "description": "Type hints, context managers, collections module, testing, and advanced idioms.",
+      "category": "Python",
+      "categoryId": "cmmoua9ar0003ywutf6xv72kt",
+      "categoryName": "Python",
+      "categorySlug": "python",
+      "topic": "Programming",
+      "topicSlug": "programming",
+      "difficulty": "HARD",
+      "tags": [
+        "python"
+      ],
+      "questionCount": 10,
+      "plays": 6,
+      "slug": null
+    },
+    {
+      "id": "cmpuzqipf02fui9utv6tw4hsw",
+      "title": "Python Logging Propagation and Exception Notes Practice Quiz",
+      "description": "Reason through logger propagation, exception context, exc_info, stack traces, and failure reports in production Python code.",
+      "category": "Python",
+      "categoryId": "cmmoua9ar0003ywutf6xv72kt",
+      "categoryName": "Python",
+      "categorySlug": "python",
+      "topic": "Programming",
+      "topicSlug": "programming",
+      "difficulty": "HARD",
+      "tags": [
+        "python",
+        "logging",
+        "exceptions",
+        "tracebacks",
+        "debugging",
+        "observability"
+      ],
+      "questionCount": 10,
+      "plays": 6,
+      "slug": "python-logging-propagation-exception-notes-practice-quiz"
+    }
+  ],
+  "meta": {
+    "limit": 10,
+    "total": 44,
+    "offset": 0
+  }
+}

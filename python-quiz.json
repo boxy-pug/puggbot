@@ -1,0 +1,109 @@
+{
+  "success": true,
+  "data": {
+    "id": "cmmnfiduw0000l1ut0x5mz5sv",
+    "title": "Python Basics",
+    "description": "Foundational Python concepts including data types, control flow, list comprehensions, and built-in functions.",
+    "category": "Programming",
+    "categoryId": "cmmoua9a30001ywutm95tppwv",
+    "categoryName": "JavaScript",
+    "categorySlug": "javascript",
+    "topic": "Programming",
+    "topicSlug": "programming",
+    "difficulty": "EASY",
+    "tags": [
+      "python",
+      "beginner"
+    ],
+    "questionCount": 4,
+    "plays": 129,
+    "slug": null,
+    "questions": [
+      {
+        "id": "cmmowabhf000dhwut9dfypl4p",
+        "text": "Python uses indentation to define code blocks instead of curly braces.",
+        "type": "TRUE_FALSE",
+        "difficulty": "EASY",
+        "explanation": "Unlike languages such as JavaScript or C, Python uses indentation (whitespace) to define code blocks. This is a core part of Python's syntax and is enforced by the interpreter.",
+        "order": 1,
+        "answers": [
+          {
+            "id": "cmmowabhm000ehwutmstdyr2k",
+            "text": "True",
+            "isCorrect": true
+          },
+          {
+            "id": "cmmowabhm000fhwutep7rc4pt",
+            "text": "False",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmmowabhq000ghwutlbqqj10c",
+        "text": "Which of the following creates a dictionary in Python?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "explanation": "Dictionaries in Python are created using curly braces {} with key-value pairs separated by colons. Lists use [], tuples use (), and angle brackets are not used for data structures.",
+        "order": 2,
+        "answers": [
+          {
+            "id": "cmmowabi0000hhwut47to0lkz",
+            "text": "{\"key\": \"value\"}",
+            "isCorrect": true
+          },
+          {
+            "id": "cmmowabi0000ihwutjtrbfzq9",
+            "text": "[\"key\": \"value\"]",
+            "isCorrect": false
+          },
+          {
+            "id": "cmmowabi0000jhwutavq4asm0",
+            "text": "(\"key\": \"value\")",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmmowabi3000khwutd30o4wuw",
+        "text": "Python is named after a TV show",
+        "type": "TRUE_FALSE",
+        "difficulty": "EASY",
+        "explanation": "",
+        "order": 3,
+        "answers": [
+          {
+            "id": "cmmowabi5000lhwut2xz5pn51",
+            "text": "True",
+            "isCorrect": true
+          },
+          {
+            "id": "cmmowabi6000mhwutmodg3eq5",
+            "text": "False",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "id": "cmmowabi7000nhwuttcgqc9ty",
+        "text": "Python was started as a hobby project",
+        "type": "TRUE_FALSE",
+        "difficulty": "EASY",
+        "explanation": "",
+        "order": 4,
+        "answers": [
+          {
+            "id": "cmmowabic000ohwutnncfxdke",
+            "text": "True",
+            "isCorrect": true
+          },
+          {
+            "id": "cmmowabid000phwutsoreokpa",
+            "text": "False",
+            "isCorrect": false
+          }
+        ]
+      }
+    ]
+  }
+}

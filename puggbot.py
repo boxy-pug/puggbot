@@ -2,10 +2,16 @@ import json
 import os
 import sys
 from dataclasses import dataclass
+from pathlib import Path
 from random import shuffle
 
 import requests
 from dotenv import load_dotenv
+from rich import console
+from rich.align import Align
+from rich.console import Console
+from rich.panel import Panel
+from rich.prompt import IntPrompt, Prompt
 
 JSON_FILE = "./python-quiz.json"
 CLEAR_SCREEN = "\033[2J"
@@ -14,6 +20,13 @@ RED = "\033[41m"
 GREEN = "\033[42m"
 YELLOW = "\033[43m"
 RESET = "\033[0m"
+
+NUMBERING_STYLE = "[yellow bold]"
+CORRECT_USER_ANSWER = "[bold green]"
+INCORRECT_USER_ANSWER = "[bold black on red]"
+CORRECT_ANSWER = "[dim green]"
+INCORRECT_ANSWER = "[dim red]"
+CLEAR_STYLE = "[/]"
 
 
 @dataclass
@@ -54,23 +67,54 @@ class Quiz:
             questions=[Question.from_dict(a) for a in data["questions"]],
         )
 
-    def show_intro(self):
-        print(self.title, end="\n\n")
-        print(self.description, end="\n\n")
-        print(f"{self.questionCount} questions. Difficulty: {self.difficulty}")
+    def show_intro(self, console: Console):
+        alternative_text = f"difficulty: {self.difficulty}"
 
-    def play(self) -> list[bool]:
-        print(CLEAR_SCREEN)
-        self.show_intro()
-        if input("Ready? (y/n) ").strip().lower() == "n":
-            sys.exit(0)
+        console.print(
+            quiz_panel(
+                0,
+                self.questionCount,
+                self.description,
+                alternative_text,
+                "Press enter when ready",
+            )
+        )
+
+    def play(self, console: Console) -> list[bool]:
+        console.clear()
+
+        self.show_intro(console)
+
+        input("")
 
         answers = []
-        for question in self.questions:
-            print(CLEAR_SCREEN)
-            answers.append(question.pose())
+        for i, question in enumerate(self.questions):
+            console.clear()
+            question_number = i + 1
+            answers.append(question.pose(console, question_number, self.questionCount))
 
         return answers
+
+
+def quiz_panel(
+    question_number: int,
+    question_count: int,
+    main: str,
+    alternatives: str,
+    bottom_text: str,
+):
+
+    text = f"""{main}
+
+{alternatives}"""
+
+    title = f"Question {question_number}/{question_count}"
+    subtitle = bottom_text if bottom_text else "Thank you"
+
+    panel = Panel(
+        text, title=title, subtitle=subtitle, width=75, padding=1, highlight=True
+    )
+    return Align(panel, vertical="middle")
 
 
 @dataclass
@@ -99,9 +143,8 @@ class Question:
             answers=[Answer.from_dict(q) for q in data["answers"]],
         )
 
-    def pose(self) -> bool:
-        print(self.text, end="\n\n")
-
+    def pose(self, console: Console, question_number: int, question_count: int) -> bool:
+        answer_alternatives = []
         correct = []
         shuffle(self.answers)
 
@@ -109,36 +152,75 @@ class Question:
             answer_number = i + 1
             if answer.isCorrect:
                 correct.append(answer_number)
-            print(f"{answer_number}: {answer.text}")
+            answer_alternatives.append(
+                f"{NUMBERING_STYLE}{answer_number}:{CLEAR_STYLE} {answer.text}"
+            )
 
-        print()
-        alternatives = "/".join([str(i) for i in range(1, len(self.answers) + 1)])
-        user_guess = int(input(f"Guess an answer ({alternatives}): "))
+        alternative_numbers = [str(i + 1) for i in range(len(answer_alternatives))]
 
-        print(CLEAR_SCREEN)
+        bottom_text = f"Choose {"/".join(alternative_numbers)} and press enter"
+
+        console.print(
+            quiz_panel(
+                question_number,
+                question_count,
+                self.text,
+                "\n".join(answer_alternatives),
+                bottom_text,
+            )
+        )
+
+        user_guess = IntPrompt.ask("Answer", choices=alternative_numbers)
+
+        console.clear()
 
         # Feedback
         if user_guess in correct:
-            print("CORRECT")
+            feedback = "Correct!"
         else:
-            print("WRONG")
+            feedback = "Wrong answer..."
 
-        print()
+        solution_alternatives = []
         for i, answer in enumerate(self.answers):
             answer_number = i + 1
-            answer_text = f"{answer_number}. {answer.text}"
-            if user_guess == answer_number:
+            answer_line = f"{answer_number}: {answer.text}"
+
+            if user_guess == answer_number:  # style the user answer
                 if answer_number in correct:
-                    print(GREEN + answer_text + RESET)
+                    solution_alternatives.append(
+                        (CORRECT_USER_ANSWER + answer_line + CLEAR_STYLE)
+                    )
                 else:
-                    print(RED + answer_text + RESET)
-            else:
-                print(answer_number, answer.text)
+                    solution_alternatives.append(
+                        (INCORRECT_USER_ANSWER + answer_line + CLEAR_STYLE)
+                    )
+            else:  # style the rest of alternatives
+                if answer_number in correct:
+                    solution_alternatives.append(
+                        (CORRECT_ANSWER + answer_line + CLEAR_STYLE)
+                    )
+                else:
+                    solution_alternatives.append(
+                        (INCORRECT_ANSWER + answer_line + CLEAR_STYLE)
+                    )
 
-        print()
-        input("Press enter to continue")
+        main_text = feedback
 
-        print(self.explanation)
+        if self.explanation:
+            main_text += "\n\n" + self.explanation
+
+        console.print(
+            quiz_panel(
+                question_number,
+                question_count,
+                main_text,
+                "\n".join(solution_alternatives),
+                "Press enter to continue",
+            )
+        )
+
+        input("")
+
         return user_guess in correct
 
 
@@ -157,75 +239,25 @@ class Answer:
         )
 
 
-def load_from_api(api_key: str, quiz_id: str) -> Quiz:
+def load_quiz_from_api(api_key: str, quiz_id: str) -> Quiz:
 
-    response = requests.get(
-        f"https://quizapi.io/api/v1/quizzes/{quiz_id}",
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        },
-    )
-    print(response)
-    if response.status_code != 200:
-        print(response.status_code)
-        sys.exit(0)
+    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
+    url = f"https://quizapi.io/api/v1/quizzes/{quiz_id}"
 
-    data = response.json()
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+
+    json_response = response.json()
     # print(f"Found {data['total']} quizzes")
-    print(data["data"])
+    # handle what happens when no data
 
-    return Quiz.from_dict(data["data"])
+    return Quiz.from_dict(json_response["data"])
 
 
-def load_from_file():
-    with open(JSON_FILE, "r") as file:
+def load_from_file(filepath: Path) -> Quiz:
+
+    with open(filepath, "r") as file:
         root_object = json.load(file)
         data = root_object["data"]
 
         return Quiz.from_dict(data)
-
-    return None
-
-
-def load_from_api_old():
-    # TODO
-    load_dotenv()
-
-    print(os.getenv("TEST_KEY"))
-
-    quizapi_key = os.getenv("QUIZAPI_KEY")
-
-    response = requests.get(
-        "https://quizapi.io/api/v2/quizzes",
-        headers={
-            "Authorization": f"Bearer {quizapi_key}",
-            "Content-Type": "application/json",
-        },
-        params={
-            "topic": "python",
-            "limit": 5,
-        },
-    )
-
-    data = response.json()
-    print(f"Found {data['total']} quizzes")
-
-    return
-
-
-def main():
-
-    quiz = load_from_file()
-    answers = quiz.play()
-
-    if all(answers):
-        print("great you got them all correct")
-    else:
-        print("good try")
-
-    pass
-
-
-if __name__ == "__main__":
-    main()
