@@ -10,6 +10,7 @@
     "categorySlug": "python",
     "topic": "Programming",
     "topicSlug": "programming",
+    "difficulty": "MEDIUM",
     "tags": [
       "python"
     ],
@@ -19,7 +20,7 @@
     "questions": [
       {
         "id": "cmnzsig6d00mxruutj7gpr2p5",
-        "text": "What is the output of the following code? ```python \nfor i in range(5): \n  if i == 3: \n    break \n  print(i, end=' ') \n  else: \n    print('done') ```",
+        "text": "What is the output of the following code? ```python \nfor i in range(5): \n\tif i == 3: \n\t\tbreak \n\tprint(i, end=' ') \n\telse: \n\t\tprint('done')\n```",
         "type": "MULTIPLE_CHOICE",
         "difficulty": "HARD",
         "explanation": "The `for...else` construct runs the `else` block only if the loop completes without hitting a `break`. Here, `break` is triggered when `i == 3`, so `else` is skipped. The loop prints 0, 1, 2 before breaking.",

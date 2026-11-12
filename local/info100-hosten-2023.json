@@ -1,0 +1,434 @@
+{
+  "data": {
+    "id": "info100-h23",
+    "title": "INFO100 – høsten 2023",
+    "description": "Lokal quiz basert på kopien av INFO100-eksamenen fra høsten 2023. Inneholder flervalgsoppgaver og langsvarsoppgaver.",
+    "categoryName": "Informasjonssystemer",
+    "topic": "INFO100 – digital kompetanse og informasjonssystemer",
+    "difficulty": "MEDIUM",
+    "tags": [
+      "INFO100",
+      "host-2023",
+      "informasjonssystemer",
+      "digital-kompetanse",
+      "passordsikkerhet",
+      "kildekritikk",
+      "opphavsrett",
+      "maskinvare",
+      "sikkerhetskopiering",
+      "datavirus",
+      "algoritmer",
+      "Big-O",
+      "internett",
+      "DNS",
+      "databaser",
+      "SQL",
+      "smidig-utvikling",
+      "brukervennlighet",
+      "personvern",
+      "webteknologi"
+    ],
+    "questionCount": 34,
+    "plays": 0,
+    "questions": [
+      {
+        "id": "info100-h23-q01",
+        "text": "Hvilket av følgende passord er det sterkeste?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q01-a1", "text": "farmer111", "isCorrect": false},
+          {"id": "info100-h23-q01-a2", "text": "J0$hua*Y17", "isCorrect": true},
+          {"id": "info100-h23-q01-a3", "text": "12345678", "isCorrect": false},
+          {"id": "info100-h23-q01-a4", "text": "England", "isCorrect": false}
+        ],
+        "explanation": "Av alternativene er J0$hua*Y17 lengst og mest variert, og dermed vanskeligere å gjette. I praksis bør passord også være unike og helst lange og tilfeldige."
+      },
+      {
+        "id": "info100-h23-q02",
+        "text": "Når du ser på informasjon på Internett, er det viktig å tenke på hvem som har skrevet den og om informasjonen du leser er korrekt. Er dette sant eller usant?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q02-a1", "text": "Usant", "isCorrect": false},
+          {"id": "info100-h23-q02-a2", "text": "Sant", "isCorrect": true}
+        ],
+        "explanation": "Det er viktig å vurdere hvem som står bak informasjonen, hvilke kilder den bygger på, og om den kan bekreftes andre steder."
+      },
+      {
+        "id": "info100-h23-q03",
+        "text": "Du kan bruke hvilket som helst bilde du finner på internett til alt du vil. Er dette sant eller usant?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q03-a1", "text": "Usant", "isCorrect": true},
+          {"id": "info100-h23-q03-a2", "text": "Sant", "isCorrect": false}
+        ],
+        "explanation": "Bilder kan være beskyttet av opphavsrett eller ha lisensvilkår som begrenser hvordan de kan brukes."
+      },
+      {
+        "id": "info100-h23-q04",
+        "text": "Hva er RAM?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q04-a1", "text": "Random access memory", "isCorrect": true},
+          {"id": "info100-h23-q04-a2", "text": "Random memory", "isCorrect": false},
+          {"id": "info100-h23-q04-a3", "text": "Run access memory", "isCorrect": false}
+        ],
+        "explanation": "RAM står for Random Access Memory. Det er et raskt, midlertidig arbeidsminne for data og programmer som er i bruk."
+      },
+      {
+        "id": "info100-h23-q05",
+        "text": "1 GB er lik",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q05-a1", "text": "256 MB", "isCorrect": false},
+          {"id": "info100-h23-q05-a2", "text": "1000 MB", "isCorrect": false},
+          {"id": "info100-h23-q05-a3", "text": "1028 MB", "isCorrect": false},
+          {"id": "info100-h23-q05-a4", "text": "1024 MB", "isCorrect": true}
+        ],
+        "explanation": "Eksamen bruker konvensjonen 1 GB = 1024 MB. Strengt SI-basert er 1 GB = 1000 MB, mens 1024 MiB = 1 GiB."
+      },
+      {
+        "id": "info100-h23-q06",
+        "text": "Hvis en USB-minnepinne hadde blitt infisert med et virus, kunne du gjøre den trygg å bruke igjen?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "answers": [
+          {"id": "info100-h23-q06-a1", "text": "Ja, kjør antivirusprogramvare på USB-pinnen for å fjerne viruset.", "isCorrect": true},
+          {"id": "info100-h23-q06-a2", "text": "Nei, du må kaste den.", "isCorrect": false},
+          {"id": "info100-h23-q06-a3", "text": "Ja, kopier alle filene til en PC eller en annen USB-pinne.", "isCorrect": false}
+        ],
+        "explanation": "Dette er alternativet som er markert riktig i PDF-en. Antivirus kan oppdage og fjerne skadevare, men en skanning gir ingen absolutt garanti for at en enhet er trygg."
+      },
+      {
+        "id": "info100-h23-q07",
+        "text": "HTML står for",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q07-a1", "text": "Hidden tool marking load", "isCorrect": false},
+          {"id": "info100-h23-q07-a2", "text": "Hyper text markup language", "isCorrect": true},
+          {"id": "info100-h23-q07-a3", "text": "Ingen av de andre", "isCorrect": false},
+          {"id": "info100-h23-q07-a4", "text": "Hyper tool making load", "isCorrect": false},
+          {"id": "info100-h23-q07-a5", "text": "Hidden text markup load", "isCorrect": false}
+        ],
+        "explanation": "Det tilsiktede fulle navnet er HyperText Markup Language, språket som brukes til å beskrive strukturen i nettsider."
+      },
+      {
+        "id": "info100-h23-q08",
+        "text": "De nødvendige egenskapene til en algoritme er følgende:",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "answers": [
+          {"id": "info100-h23-q08-a1", "text": "Inndata er spesifisert, utdata er spesifisert, effektivitet, bestemthet, endelighet", "isCorrect": true},
+          {"id": "info100-h23-q08-a2", "text": "Inndata er spesifisert, utdata er spesifisert, effektivitet", "isCorrect": false},
+          {"id": "info100-h23-q08-a3", "text": "Inndata er spesifisert, utdata er spesifisert, effektivitet, bestemthet", "isCorrect": false}
+        ],
+        "explanation": "En algoritme skal ha definerte inndata og utdata, være bestemt og effektiv, og avsluttes etter et endelig antall steg."
+      },
+      {
+        "id": "info100-h23-q09",
+        "text": "Big-O-notasjon er et mål på algoritmisk kompleksitet. Det betyr",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "answers": [
+          {"id": "info100-h23-q09-a1", "text": "Hvordan algoritmen skalerer når inndatastørrelsen øker.", "isCorrect": true},
+          {"id": "info100-h23-q09-a2", "text": "Hvor brukervennlig algoritmen er.", "isCorrect": false},
+          {"id": "info100-h23-q09-a3", "text": "Hvor dyp algoritmen er.", "isCorrect": false}
+        ],
+        "explanation": "Big-O beskriver hvordan ressursbruken til en algoritme vokser når størrelsen på inndataene øker."
+      },
+      {
+        "id": "info100-h23-q10",
+        "text": "Du må ta sikkerhetskopier av viktige filer for å unngå å miste informasjon. Er dette sant eller usant?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q10-a1", "text": "Usant", "isCorrect": false},
+          {"id": "info100-h23-q10-a2", "text": "Sant", "isCorrect": true}
+        ],
+        "explanation": "Sikkerhetskopier gjør det mulig å gjenopprette informasjon hvis originalfilene går tapt, blir skadet eller utilgjengelige."
+      },
+      {
+        "id": "info100-h23-q11",
+        "text": "www står for",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q11-a1", "text": "Ingen av de andre", "isCorrect": false},
+          {"id": "info100-h23-q11-a2", "text": "World wide web", "isCorrect": true},
+          {"id": "info100-h23-q11-a3", "text": "West worm web", "isCorrect": false},
+          {"id": "info100-h23-q11-a4", "text": "World worm web", "isCorrect": false}
+        ],
+        "explanation": "WWW står for World Wide Web, et system av nettsider og andre ressurser som brukes over internett."
+      },
+      {
+        "id": "info100-h23-q12",
+        "text": "Hva er en URL?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q12-a1", "text": "Universal Remote Long", "isCorrect": false},
+          {"id": "info100-h23-q12-a2", "text": "Ingen av de andre", "isCorrect": false},
+          {"id": "info100-h23-q12-a3", "text": "Universal Resource Locator", "isCorrect": false},
+          {"id": "info100-h23-q12-a4", "text": "Uniform Resource Locator", "isCorrect": true}
+        ],
+        "explanation": "URL står for Uniform Resource Locator og identifiserer adressen til en ressurs, for eksempel en nettside."
+      },
+      {
+        "id": "info100-h23-q13",
+        "text": "Når du jobber med andre mennesker via Internett kan risikoen for virus være et problem. Er dette sant eller usant?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q13-a1", "text": "Sant", "isCorrect": true},
+          {"id": "info100-h23-q13-a2", "text": "Usant", "isCorrect": false}
+        ],
+        "explanation": "Filer og lenker som deles på nettet, kan spre skadevare. Vurder kilden og vær forsiktig med uventet innhold."
+      },
+      {
+        "id": "info100-h23-q14",
+        "text": "Hva kan du gjøre for å minimere risikoen for datavirus?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "answers": [
+          {"id": "info100-h23-q14-a1", "text": "Behandle ukjente e-postvedlegg med forsiktighet", "isCorrect": false},
+          {"id": "info100-h23-q14-a2", "text": "Alle de andre", "isCorrect": true},
+          {"id": "info100-h23-q14-a3", "text": "Installer antivirusprogramvare og oppdater den regelmessig", "isCorrect": false},
+          {"id": "info100-h23-q14-a4", "text": "Ikke åpne e-postvedlegg", "isCorrect": false}
+        ],
+        "explanation": "PDF-en markerer «Alle de andre». Det sentrale rådet er å være forsiktig med ukjente vedlegg og holde sikkerhetsprogramvare oppdatert. I praksis er ikke alle legitime vedlegg farlige."
+      },
+      {
+        "id": "info100-h23-q15",
+        "text": "Hvis en fil er sendt til deg av en person du ikke kjenner, åpne den så snart som mulig for å se hva den er før du sletter den. Er dette sant eller usant?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q15-a1", "text": "Usant", "isCorrect": true},
+          {"id": "info100-h23-q15-a2", "text": "Sant", "isCorrect": false}
+        ],
+        "explanation": "Ikke åpne uventede filer fra ukjente avsendere. Kontroller avsenderen og bruk sikre metoder for å undersøke filen hvis det er nødvendig."
+      },
+      {
+        "id": "info100-h23-q16",
+        "text": "Hva brukes en brannmur til?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q16-a1", "text": "For å få datamaskinen til å kjøre raskere", "isCorrect": false},
+          {"id": "info100-h23-q16-a2", "text": "For å endre skjermoppløsning", "isCorrect": false},
+          {"id": "info100-h23-q16-a3", "text": "For å tømme internetthistorikk", "isCorrect": false},
+          {"id": "info100-h23-q16-a4", "text": "For å blokkere uønskede nedlastinger", "isCorrect": true}
+        ],
+        "explanation": "Dette alternativet er markert i PDF-en. Mer presist filtrerer en brannmur nettverkstrafikk etter regler for å blokkere uønskede forbindelser."
+      },
+      {
+        "id": "info100-h23-q17",
+        "text": "Datamaskindomener (DNS) er",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "answers": [
+          {"id": "info100-h23-q17-a1", "text": "Er ikke akkurat det samme som IP-adresser, men har lignende funksjon og bruker lesbare symboler", "isCorrect": true},
+          {"id": "info100-h23-q17-a2", "text": "Det samme som IP-adresser, men internett er basert på en serie med tall (0-255)", "isCorrect": false},
+          {"id": "info100-h23-q17-a3", "text": "Tall basert på tallserien (0-255)", "isCorrect": false}
+        ],
+        "explanation": "DNS oversetter lesbare domenenavn til IP-adresser. Domenenavn og IP-adresser er ikke det samme, selv om begge brukes til å finne tjenester på nettet."
+      },
+      {
+        "id": "info100-h23-q18",
+        "text": "Systemutviklingsteam som inkluderer produkteiere, brukere, interessenter er vanligvis",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "answers": [
+          {"id": "info100-h23-q18-a1", "text": "Både fossefall og smidig", "isCorrect": false},
+          {"id": "info100-h23-q18-a2", "text": "Fossefall", "isCorrect": false},
+          {"id": "info100-h23-q18-a3", "text": "Smidig (agil)", "isCorrect": true}
+        ],
+        "explanation": "Smidig utvikling legger vekt på løpende samarbeid mellom utviklingsteamet, produkteier, brukere og andre interessenter."
+      },
+      {
+        "id": "info100-h23-q19",
+        "text": "Et relasjonsdatabasestyringssystem (RDBMS) er basert på",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q19-a1", "text": "Relasjoner", "isCorrect": true},
+          {"id": "info100-h23-q19-a2", "text": "Objekt", "isCorrect": false},
+          {"id": "info100-h23-q19-a3", "text": "Både relasjoner og objekt", "isCorrect": false}
+        ],
+        "explanation": "Et relasjonsdatabasesystem organiserer data i relaterte tabeller."
+      },
+      {
+        "id": "info100-h23-q20",
+        "text": "I relasjonsdatabasesystemer kobler fremmednøkkel",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "answers": [
+          {"id": "info100-h23-q20-a1", "text": "To forskjellige tabeller som inneholder data registrert i forskjellige systemer", "isCorrect": false},
+          {"id": "info100-h23-q20-a2", "text": "To forskjellige databaser fra forskjellige databasesystemer", "isCorrect": false},
+          {"id": "info100-h23-q20-a3", "text": "To forskjellige tabeller i samme databasesystem", "isCorrect": true}
+        ],
+        "explanation": "En fremmednøkkel viser til en nøkkel i en annen tabell og brukes til å uttrykke en relasjon mellom tabeller i databasen."
+      },
+      {
+        "id": "info100-h23-q21",
+        "text": "System usability scale (SUS) er en skala for å vurdere brukervennlighet. Er dette sant eller usant?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q21-a1", "text": "False", "isCorrect": false},
+          {"id": "info100-h23-q21-a2", "text": "True", "isCorrect": true}
+        ],
+        "explanation": "System Usability Scale (SUS) er et standardisert spørreskjema som brukes til å måle brukeres opplevde brukervennlighet."
+      },
+      {
+        "id": "info100-h23-q22",
+        "text": "System usability scale (SUS) score over 70 er",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "answers": [
+          {"id": "info100-h23-q22-a1", "text": "Dårlig", "isCorrect": false},
+          {"id": "info100-h23-q22-a2", "text": "Akseptabel", "isCorrect": true},
+          {"id": "info100-h23-q22-a3", "text": "Veldig god", "isCorrect": false}
+        ],
+        "explanation": "PDF-en markerer «Akseptabel». Tolkningen av SUS-skårer varierer noe med referanseskalaen som brukes."
+      },
+      {
+        "id": "info100-h23-q23",
+        "text": "Nielson og Molichs tommelfingerregler brukes til å vurdere",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "answers": [
+          {"id": "info100-h23-q23-a1", "text": "Brukertilfredshet, brukeropplevelse, systemstøtte", "isCorrect": false},
+          {"id": "info100-h23-q23-a2", "text": "Brukertilfredshet, brukeropplevelse, systemstøtte, interaksjon", "isCorrect": false},
+          {"id": "info100-h23-q23-a3", "text": "Brukertilfredshet, brukeropplevelse, systemstøtte, opplæring, interaksjon", "isCorrect": true}
+        ],
+        "explanation": "Dette alternativet er markert i PDF-en. Nielsen og Molichs heuristikker brukes i evaluering av brukervennlighet og samspillet mellom bruker og system."
+      },
+      {
+        "id": "info100-h23-q24",
+        "text": "Standard åttepunktsliste over OECDs personvernprinsipper er brukt til",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "answers": [
+          {"id": "info100-h23-q24-a1", "text": "Sørge for sikre metoder for overvåking av innbyggere", "isCorrect": false},
+          {"id": "info100-h23-q24-a2", "text": "Fremme OECD som leder av personvernregulering", "isCorrect": false},
+          {"id": "info100-h23-q24-a3", "text": "Gi klare retningslinjer vedtatt for håndtering av privat informasjon", "isCorrect": true}
+        ],
+        "explanation": "Prinsippene gir retningslinjer for innsamling, bruk, sikring og håndtering av personopplysninger."
+      },
+      {
+        "id": "info100-h23-q25",
+        "text": "Gitt tabellen Student med kolonnene StudNr, Name og University og radene (1, Per, HVL), (2, Kari, UiB) og (3, John, UiB): Hvilken setning finner navnet på alle studentene som studerer ved HVL?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "answers": [
+          {"id": "info100-h23-q25-a1", "text": "FIND Name FROM Student WHERE University = 'HVL';", "isCorrect": false},
+          {"id": "info100-h23-q25-a2", "text": "SELECT * FROM Student WHERE University = 'HVL';", "isCorrect": false},
+          {"id": "info100-h23-q25-a3", "text": "SELECT Name FROM Student WHERE University = 'HVL';", "isCorrect": true},
+          {"id": "info100-h23-q25-a4", "text": "SELECT Name FROM Student;", "isCorrect": false}
+        ],
+        "explanation": "SELECT Name velger bare navnekolonnen, og WHERE University = 'HVL' filtrerer radene til studentene ved HVL."
+      },
+      {
+        "id": "info100-h23-q26",
+        "text": "Brukerhistorier brukes til å definere krav i",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q26-a1", "text": "Fossefall-metoden", "isCorrect": false},
+          {"id": "info100-h23-q26-a2", "text": "Smidige (agile) utviklingsmetoder", "isCorrect": true}
+        ],
+        "explanation": "Brukerhistorier er en vanlig måte å uttrykke brukerbehov og krav på i smidige utviklingsmetoder."
+      },
+      {
+        "id": "info100-h23-q27",
+        "text": "Hva er de tre typene stilark (CSS)?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q27-a1", "text": "Internal, external, inline", "isCorrect": true},
+          {"id": "info100-h23-q27-a2", "text": "Ingen av de andre", "isCorrect": false},
+          {"id": "info100-h23-q27-a3", "text": "Insidious, internal, external", "isCorrect": false},
+          {"id": "info100-h23-q27-a4", "text": "Inline, internal, extreme", "isCorrect": false}
+        ],
+        "explanation": "CSS kan være intern i et style-element, ekstern i en separat fil eller inline direkte på et HTML-element."
+      },
+      {
+        "id": "info100-h23-q28",
+        "text": "Koden <link type=\"stylsheet\" href=\"exx.css\"> tilhører",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q28-a1", "text": "Ingen av de andre", "isCorrect": false},
+          {"id": "info100-h23-q28-a2", "text": "Internal", "isCorrect": false},
+          {"id": "info100-h23-q28-a3", "text": "Inline", "isCorrect": false},
+          {"id": "info100-h23-q28-a4", "text": "External", "isCorrect": true}
+        ],
+        "explanation": "PDF-en markerer External fordi koden viser til en separat CSS-fil. Snutten ser ut til å ha en skrivefeil i stylesheet og mangler rel-attributtet."
+      },
+      {
+        "id": "info100-h23-q29",
+        "text": "Hva er forskjellen mellom HTML og CSS?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "EASY",
+        "answers": [
+          {"id": "info100-h23-q29-a1", "text": "CSS strukturerer en nettside. HTML gir styling.", "isCorrect": false},
+          {"id": "info100-h23-q29-a2", "text": "HTML gir en nettsidestruktur. CSS gir styling.", "isCorrect": true},
+          {"id": "info100-h23-q29-a3", "text": "CSS er en type HTML", "isCorrect": false},
+          {"id": "info100-h23-q29-a4", "text": "Det er ingen forskjell.", "isCorrect": false}
+        ],
+        "explanation": "HTML beskriver innhold og struktur, mens CSS styrer presentasjonen og utseendet."
+      },
+      {
+        "id": "info100-h23-q30",
+        "text": "Figuren viser Order forbundet med OrderDetails. En fylt diamant er tegnet ved Order, og det står 1 ved begge ender. Hva viser figuren?",
+        "type": "MULTIPLE_CHOICE",
+        "difficulty": "MEDIUM",
+        "answers": [
+          {"id": "info100-h23-q30-a1", "text": "Assosiasjon mellom Order og OrderDetails", "isCorrect": false},
+          {"id": "info100-h23-q30-a2", "text": "Alle de andre", "isCorrect": true},
+          {"id": "info100-h23-q30-a3", "text": "Komposisjon mellom Order og OrderDetails", "isCorrect": false},
+          {"id": "info100-h23-q30-a4", "text": "Aggregering mellom Order og OrderDetails", "isCorrect": false}
+        ],
+        "explanation": "PDF-en markerer «Alle de andre», men dette svaret er faglig tvilsomt: en fylt diamant angir vanligvis komposisjon, som er en spesialisert assosiasjon. Den angir ikke samtidig aggregering. Sjekk fasiten før denne brukes som et entydig lærespørsmål."
+      },
+      {
+        "id": "info100-h23-q31",
+        "text": "Forklar begrepene data, informasjon og kunnskap. Forklaringen må tydelig vise forskjellene mellom begrepene.",
+        "type": "OPEN_ENDED",
+        "difficulty": "MEDIUM",
+        "answers": [],
+        "explanation": "Forslag til svar og vurderingsmomenter – ikke en offisiell fasit, siden PDF-en ikke inneholder svar på langsvarsoppgavene: Data er registrerte tegn eller observasjoner uten nødvendig sammenheng, for eksempel «18». Når data settes i en kontekst og får mening, blir de informasjon, for eksempel «temperaturen er 18 °C». Kunnskap er forståelse som gjør at informasjon kan tolkes og brukes, for eksempel å vite hva temperaturen betyr for valg av klær. Vurder at svaret definerer alle tre begrepene, forklarer at informasjon oppstår når data får kontekst og mening, og viser at kunnskap innebærer forståelse og anvendelse."
+      },
+      {
+        "id": "info100-h23-q32",
+        "text": "De fleste utviklingsprosjekter bruker en smidig (agil) utviklingsmetode i dag. Forklar hvorfor man benytter smidige metoder for å utvikle informasjonssystemer.",
+        "type": "OPEN_ENDED",
+        "difficulty": "MEDIUM",
+        "answers": [],
+        "explanation": "Forslag til svar og vurderingsmomenter – ikke en offisiell fasit: Smidige metoder deler arbeidet i korte iterasjoner der teamet leverer og vurderer deler av løsningen. Brukere og interessenter gir tilbakemeldinger underveis, slik at krav kan justeres når behov endres. Dette kan gi tidligere nytte, raskere avdekking av problemer og bedre samsvar med brukernes behov. Vurder at svaret forklarer iterativ utvikling, samarbeid og tilbakemeldinger, fleksibilitet og hvordan hyppig evaluering kan redusere risiko eller forbedre resultatet."
+      },
+      {
+        "id": "info100-h23-q33",
+        "text": "Internett benyttes mye i informasjonssamfunnet. Forklar hvordan internett fungerer.",
+        "type": "OPEN_ENDED",
+        "difficulty": "MEDIUM",
+        "answers": [],
+        "explanation": "Forslag til svar og vurderingsmomenter – ikke en offisiell fasit: Internett er et globalt nettverk av sammenkoblede datanettverk som kommuniserer ved hjelp av felles protokoller, blant annet TCP/IP. Enheter bruker IP-adresser for å kommunisere. DNS finner IP-adressen som hører til et domenenavn. Data deles opp i pakker, sendes gjennom rutere mellom nettverk og settes sammen igjen hos mottakeren. World Wide Web er en tjeneste som bruker internett. Vurder at svaret beskriver nettverk av nettverk, adressering og ruting eller datapakker, DNS og gjerne forskjellen mellom internett og World Wide Web."
+      },
+      {
+        "id": "info100-h23-q34",
+        "text": "I dag deler vi mye informasjon, spesielt på sosiale medier. Hva må vi tenke på i forhold til personvern og sikkerhet når vi sender og mottar informasjon?",
+        "type": "OPEN_ENDED",
+        "difficulty": "MEDIUM",
+        "answers": [],
+        "explanation": "Forslag til svar og vurderingsmomenter – ikke en offisiell fasit: Del minst mulig sensitiv eller personlig informasjon, og vurder hvem som kan se, lagre, kopiere eller videresende den. Kontroller personverninnstillinger og mottakere, og be om samtykke før du deler andres opplysninger eller bilder. Vær kritisk til lenker, vedlegg, avsendere og forespørsler om passord eller andre hemmeligheter. Bruk sterke, unike passord og sikre forbindelser der det er relevant. Vurder om svaret omtaler personopplysninger og mottakere, samtykke eller digitalt fotavtrykk, og konkrete tiltak mot svindel, skadevare eller uautorisert tilgang."
+      }
+    ]
+  }
+}

@@ -4,7 +4,7 @@ from pathlib import Path
 
 import requests
 
-from puggbot import Quiz
+from models import Quiz
 
 SEARCH_LIMIT = 50
 SEARCH_SORTING_CONDITION = "popular"

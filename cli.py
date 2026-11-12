@@ -6,13 +6,15 @@ from pathlib import Path
 from dotenv import load_dotenv
 from rich.console import Console
 
-from puggbot import Quiz
-from quizloader import (
+from game import play
+from models import Quiz
+from quiz_loader import (
     get_all_categories_from_api,
     get_quiz_from_api,
     get_quiz_from_file,
     run_fzf_search_on_api,
 )
+from ui import get_pugg_theme
 
 
 def parse_args() -> argparse.Namespace:
@@ -51,7 +53,7 @@ def parse_args() -> argparse.Namespace:
 def main():
 
     # start console and stderr
-    console = Console()
+    console = Console(theme=get_pugg_theme())
     err_console = Console(stderr=True)
 
     # Get QuizAPI API key from .env, exit program if not found.
@@ -79,7 +81,7 @@ def main():
             return 1
 
         if quiz:
-            result = quiz.play(console)
+            result = play(quiz, console)
 
     elif args.browse:
         if args.browse:
@@ -103,7 +105,7 @@ def main():
 
         quiz_id = run_fzf_search_on_api(quizapi_key, search_term)
         quiz = get_quiz_from_api(quizapi_key, quiz_id)
-        result = quiz.play(console)
+        result = play(quiz, console)
 
 
 if __name__ == "__main__":
