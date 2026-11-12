@@ -8,23 +8,6 @@ from models import Question, Quiz
 from ui import ScreenType, generate_feedback, quiz_panel, style_solution_answer
 
 
-def show_intro(quiz: Quiz, console: Console):
-
-    title = quiz.title
-    main_text = f"[dim]Difficulty: {quiz.difficulty.value}[/]"
-    top_text = f"Question {0}/{quiz.questionCount}"
-
-    console.print(
-        quiz_panel(
-            top_text,
-            title,
-            main_text,
-            [quiz.description],
-            ScreenType.INTRO,
-        )
-    )
-
-
 def play(quiz: Quiz, console: Console) -> list[bool]:
     console.clear()
 
@@ -50,6 +33,23 @@ def play(quiz: Quiz, console: Console) -> list[bool]:
     show_results(quiz, answers, console)
 
     return answers
+
+
+def show_intro(quiz: Quiz, console: Console):
+
+    title = quiz.title
+    main_text = f"Category: {quiz.categoryName}\nDifficulty: {quiz.difficulty.value}"
+    top_text = f"Question {0}/{quiz.questionCount}"
+
+    console.print(
+        quiz_panel(
+            top_text,
+            title,
+            main_text,
+            [quiz.description],
+            ScreenType.INTRO,
+        )
+    )
 
 
 def show_results(quiz: Quiz, answers: list[bool], console: Console):
@@ -112,7 +112,7 @@ def pose(
 
     # Feedback
     feedback = generate_feedback(
-        user_guess in correct_answers_numbers, question.difficulty
+        user_guess in correct_answers_numbers, question.difficulty.value
     )
 
     solution_alternatives = []

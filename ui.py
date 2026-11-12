@@ -116,6 +116,3 @@ def style_solution_answer(answer: str, is_correct: bool, is_user_answer: bool) -
             return CORRECT_ANSWER + answer + CLEAR_STYLE
         else:
             return INCORRECT_ANSWER + answer + CLEAR_STYLE
-
-
-# TODO

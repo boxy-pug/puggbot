@@ -17,6 +17,14 @@ from quiz_loader import (
 from ui import get_pugg_theme
 
 
+def get_user_search_term() -> str:
+    search_term = input(
+        "Welcome to Pugg, what do you want to quiz about today?\nEnter search term: "
+    )
+
+    return str(search_term)
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         prog="Puggbot", description="Pugg til eksamen i terminalen"
@@ -95,13 +103,7 @@ def main():
     else:
         search_term = args.searchterm
         if not search_term:
-            search_term = (
-                input(
-                    "Welcome to Pugg, what do you want to quiz about today?\nEnter search term: "
-                )
-                .strip()
-                .lower()
-            )
+            search_term = get_user_search_term()
 
         quiz_id = run_fzf_search_on_api(quizapi_key, search_term)
         quiz = get_quiz_from_api(quizapi_key, quiz_id)

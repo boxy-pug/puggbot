@@ -15,7 +15,8 @@ def get_all_categories_from_api() -> dict:
     headers = {"Content-Type": "application/json"}
     response = requests.get(url, headers=headers)
     root_object = response.json()
-    return root_object["data"]
+    data = get_data_from_root_object(root_object)
+    return data
 
 
 def search_quizzes_from_api(api_key: str, search_term: str) -> dict:
@@ -28,8 +29,9 @@ def search_quizzes_from_api(api_key: str, search_term: str) -> dict:
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
 
     response = requests.get(url, params=params, headers=headers)
-    data = response.json()
-    return data["data"]
+    root_object = response.json()
+    data = get_data_from_root_object(root_object)
+    return data
 
 
 def get_quiz_id_from_search_line(search_line: str) -> str:
@@ -67,17 +69,22 @@ def get_quiz_from_api(api_key: str, quiz_id: str) -> Quiz:
     response = requests.get(url, headers=headers)
     response.raise_for_status()
 
-    json_response = response.json()
-    # print(f"Found {data['total']} quizzes")
-    # handle what happens when no data
+    root_object = response.json()
+    data = get_data_from_root_object(root_object)
 
-    return Quiz.from_dict(json_response["data"])
+    return Quiz.from_dict(data)
 
 
 def get_quiz_from_file(filepath: Path) -> Quiz:
 
     with open(filepath, "r") as file:
         root_object = json.load(file)
-        data = root_object["data"]
+        data = get_data_from_root_object(root_object)
 
         return Quiz.from_dict(data)
+
+
+def get_data_from_root_object(obj: dict) -> dict:
+    if "data" in obj:
+        return obj["data"]
+    return obj
