@@ -3,15 +3,18 @@ import os
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from random import shuffle
+from random import choice, shuffle
 
 import requests
 from dotenv import load_dotenv
 from rich import console
 from rich.align import Align
-from rich.console import Console
+from rich.console import Console, Group
+from rich.markdown import Markdown
 from rich.panel import Panel
 from rich.prompt import IntPrompt, Prompt
+from rich.syntax import Syntax
+from rich.table import Table
 
 JSON_FILE = "./python-quiz.json"
 CLEAR_SCREEN = "\033[2J"
@@ -34,17 +37,13 @@ class Quiz:
     id: str
     title: str  # max 200 chars
     description: str  # max 2000 chars, can be null
-    category: str  # max 100 chars, legacy
-    categoryId: str  # can be null
+    # categoryId: str  # can be null
     categoryName: str
-    categorySlug: str  # can be null
     topic: str  # can be null
-    topicSlug: str  # can be null
     difficulty: str  # Enum? "EASY", "HARD", "MEDIUM", "EXPERT"
     tags: list[str]  # max 20 tags, max 50 chars each
     questionCount: int
     plays: int
-    slug: None  # ?
     questions: list[Question]
 
     @classmethod
@@ -53,29 +52,28 @@ class Quiz:
             id=data["id"],
             title=data["title"],
             description=data["description"],
-            category=data["category"],
-            categoryId=data["categoryId"],
+            # categoryId=data["categoryId"],
             categoryName=data["categoryName"],
-            categorySlug=data["categorySlug"],
             topic=data["topic"],
-            topicSlug=data["topicSlug"],
             difficulty=data["difficulty"],
             tags=data["tags"],
             questionCount=data["questionCount"],
             plays=data["plays"],
-            slug=data["slug"],
             questions=[Question.from_dict(a) for a in data["questions"]],
         )
 
     def show_intro(self, console: Console):
-        alternative_text = f"difficulty: {self.difficulty}"
+
+        title = f"[bold yellow]{self.title}[/]"
+        main_text = f"[dim]Difficulty: {self.difficulty}[/]"
+        top_text = f"Question {0}/{self.questionCount}"
 
         console.print(
             quiz_panel(
-                0,
-                self.questionCount,
+                top_text,
+                title,
+                main_text,
                 self.description,
-                alternative_text,
                 "Press enter when ready",
             )
         )
@@ -91,29 +89,51 @@ class Quiz:
         for i, question in enumerate(self.questions):
             console.clear()
             question_number = i + 1
-            answers.append(question.pose(console, question_number, self.questionCount))
+            answers.append(
+                question.pose(
+                    console,
+                    question_number,
+                    self.questionCount,
+                    f"[dim]{self.title}[/]",
+                )
+            )
+
+        console.clear()
+        self.show_results(answers, console)
 
         return answers
 
+    def show_results(self, answers: list[bool], console: Console):
+
+        top_text = "Finished quiz"
+        main_text = f"Congratulations!"
+        body_text = f"{sum(answers)}/{self.questionCount}"
+
+        console.print(
+            quiz_panel(
+                top_text,
+                f"[dim]{self.title}[/]",
+                main_text,
+                body_text,
+                "Thank you for playing",
+            )
+        )
+
 
 def quiz_panel(
-    question_number: int,
-    question_count: int,
+    top: str,
+    title: str,
     main: str,
-    alternatives: str,
-    bottom_text: str,
+    body: str,
+    bottom: str,
 ):
 
-    text = f"""{main}
+    # content = Group(Align(title, align="center"), Syntax(main, "python"), Align(body))
+    # consider using group
 
-{alternatives}"""
+    text = f"{title}\n\n{main}\n\n{body}"
 
-    title = f"Question {question_number}/{question_count}"
-    subtitle = bottom_text if bottom_text else "Thank you"
-
-    panel = Panel(
-        text, title=title, subtitle=subtitle, width=75, padding=1, highlight=True
-    )
+    panel = Panel(text, title=top, subtitle=bottom, width=75, padding=1, highlight=True)
     return Align(panel, vertical="middle")
 
 
@@ -124,10 +144,8 @@ class Question:
     text: str
     type: str  # enum? one of: MULTIPLE_CHOICE, TRUE_FALSE, OPEN_ENDED
     difficulty: str  # Enum? "EASY", "HARD", "MEDIUM", "EXPERT"
-    explanation: str  # can be null
-    # category: str  # can be null
-    order: int  # whats this?
     answers: list[Answer]
+    explanation: str | None = ""  # can be null
 
     @classmethod
     def from_dict(cls, data):
@@ -137,91 +155,120 @@ class Question:
             text=data["text"],
             type=data["type"],
             difficulty=data["difficulty"],
-            explanation=data["explanation"],
-            # category=data["category"],
-            order=data["order"],
             answers=[Answer.from_dict(q) for q in data["answers"]],
+            explanation=data.get("explanation"),
         )
 
-    def pose(self, console: Console, question_number: int, question_count: int) -> bool:
-        answer_alternatives = []
-        correct = []
+    def pose(
+        self,
+        console: Console,
+        question_number: int,
+        question_count: int,
+        quiz_title: str,
+    ) -> bool:
+
         shuffle(self.answers)
+        answer_texts = []
+        answer_numbers = []
+        correct_answers = []
 
         for i, answer in enumerate(self.answers):
             answer_number = i + 1
+
+            answer_numbers.append(str(answer_number))
+
             if answer.isCorrect:
-                correct.append(answer_number)
-            answer_alternatives.append(
+                correct_answers.append(answer_number)
+
+            answer_texts.append(
                 f"{NUMBERING_STYLE}{answer_number}:{CLEAR_STYLE} {answer.text}"
             )
 
-        alternative_numbers = [str(i + 1) for i in range(len(answer_alternatives))]
-
-        bottom_text = f"Choose {"/".join(alternative_numbers)} and press enter"
+        top_text = f"Question {question_number}/{question_count}"
+        bottom_text = f"Choose {"/".join(answer_numbers)} and press enter"
 
         console.print(
             quiz_panel(
-                question_number,
-                question_count,
+                top_text,
+                quiz_title,
                 self.text,
-                "\n".join(answer_alternatives),
+                "\n".join(answer_texts),
                 bottom_text,
             )
         )
 
-        user_guess = IntPrompt.ask("Answer", choices=alternative_numbers)
+        user_guess = IntPrompt.ask("Answer", choices=answer_numbers)
 
         console.clear()
 
         # Feedback
-        if user_guess in correct:
-            feedback = "Correct!"
-        else:
-            feedback = "Wrong answer..."
+        feedback = generate_feedback(user_guess in correct_answers, self.difficulty)
 
         solution_alternatives = []
+
         for i, answer in enumerate(self.answers):
             answer_number = i + 1
-            answer_line = f"{answer_number}: {answer.text}"
-
-            if user_guess == answer_number:  # style the user answer
-                if answer_number in correct:
-                    solution_alternatives.append(
-                        (CORRECT_USER_ANSWER + answer_line + CLEAR_STYLE)
-                    )
-                else:
-                    solution_alternatives.append(
-                        (INCORRECT_USER_ANSWER + answer_line + CLEAR_STYLE)
-                    )
-            else:  # style the rest of alternatives
-                if answer_number in correct:
-                    solution_alternatives.append(
-                        (CORRECT_ANSWER + answer_line + CLEAR_STYLE)
-                    )
-                else:
-                    solution_alternatives.append(
-                        (INCORRECT_ANSWER + answer_line + CLEAR_STYLE)
-                    )
+            answer_text = f"{answer_number}: {answer.text}"
+            # style the answerlist
+            solution_alternatives.append(
+                style_solution_answer(
+                    answer_text,
+                    answer_number in correct_answers,
+                    user_guess == answer_number,
+                )
+            )
 
         main_text = feedback
-
         if self.explanation:
             main_text += "\n\n" + self.explanation
 
         console.print(
             quiz_panel(
-                question_number,
-                question_count,
+                top_text,
+                quiz_title,
                 main_text,
                 "\n".join(solution_alternatives),
-                "Press enter to continue",
+                "Enter to continue or q to quit",
             )
         )
 
-        input("")
+        # handle better quitting
+        if input("").strip().lower() == "q":
+            sys.exit(1)
 
-        return user_guess in correct
+        return user_guess in correct_answers
+
+
+def generate_feedback(is_correct: bool, difficulty: str) -> str:
+    correct_feedback = [
+        "Yes, exactly!",
+        "Correct!",
+        "Yes, that's correct.",
+        "Yep, you guessed correctly.",
+    ]
+    wrong_feedback = [
+        "Nope, that's not right.",
+        "Incorrect.",
+        "Wrong...",
+        "No, wrong answer.",
+    ]
+    if is_correct:
+        return f"[green bold]{choice(correct_feedback)}[/]"
+    else:
+        return f"[red bold]{choice(wrong_feedback)}[/]"
+
+
+def style_solution_answer(answer: str, is_correct: bool, is_user_answer: bool) -> str:
+    if is_user_answer:
+        if is_correct:
+            return CORRECT_USER_ANSWER + answer + CLEAR_STYLE
+        else:
+            return INCORRECT_USER_ANSWER + answer + CLEAR_STYLE
+    else:
+        if is_correct:
+            return CORRECT_ANSWER + answer + CLEAR_STYLE
+        else:
+            return INCORRECT_ANSWER + answer + CLEAR_STYLE
 
 
 @dataclass
@@ -237,27 +284,3 @@ class Answer:
             text=data["text"],
             isCorrect=data["isCorrect"],
         )
-
-
-def load_quiz_from_api(api_key: str, quiz_id: str) -> Quiz:
-
-    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
-    url = f"https://quizapi.io/api/v1/quizzes/{quiz_id}"
-
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()
-
-    json_response = response.json()
-    # print(f"Found {data['total']} quizzes")
-    # handle what happens when no data
-
-    return Quiz.from_dict(json_response["data"])
-
-
-def load_from_file(filepath: Path) -> Quiz:
-
-    with open(filepath, "r") as file:
-        root_object = json.load(file)
-        data = root_object["data"]
-
-        return Quiz.from_dict(data)
