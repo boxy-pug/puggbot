@@ -1,11 +1,8 @@
 import argparse
 import os
-import subprocess
 import sys
 from pathlib import Path
-from pprint import pprint
 
-import requests
 from dotenv import load_dotenv
 from rich.console import Console
 
@@ -14,9 +11,8 @@ from quizloader import (
     get_all_categories_from_api,
     get_quiz_from_api,
     get_quiz_from_file,
-    search_quiz_from_api,
+    run_fzf_search_on_api,
 )
-from rich_formatting import format_quiz_search_line
 
 
 def parse_args() -> argparse.Namespace:
@@ -24,16 +20,16 @@ def parse_args() -> argparse.Namespace:
         prog="Puggbot", description="Pugg til eksamen i terminalen"
     )
 
-    parser.add_argument("searchterm", nargs="?", metavar="SEARCHTERM")
-
     parser.add_argument(
-        "--local",
-        type=Path,
-        metavar="QUIZ",
-        help="play quiz from json file",
+        "searchterm", nargs="?", metavar="SEARCHTERM", help="search for and play quiz"
     )
 
-    parser.add_argument("--user", metavar="USERNAME", help="provide username")
+    parser.add_argument(
+        "--file",
+        type=Path,
+        metavar="QUIZFILE",
+        help="play quiz from local json file",
+    )
 
     parser.add_argument(
         "--browse",
@@ -41,30 +37,15 @@ def parse_args() -> argparse.Namespace:
         help="browse topics, categories and choose quiz",
     )
 
+    parser.add_argument(
+        "--local",
+        action="store_true",
+        help="choose between local quizzes",
+    )
+
+    # parser.add_argument("--user", metavar="USERNAME", help="provide username")
+
     return parser.parse_args()
-
-
-def get_quiz_id_from_search_line(search_line: str) -> str:
-    return search_line.split()[-1].strip()
-
-
-def run_fzf_search(api_key: str, search_term: str) -> str:
-
-    quizzes = search_quiz_from_api(api_key, search_term)
-    quizzes_line_formatted = "\n".join(
-        [format_quiz_search_line(quiz) for quiz in quizzes]
-    )
-
-    # Let user choose a quiz using fzf as subprocess
-    picked = subprocess.run(
-        ["fzf"], input=quizzes_line_formatted, stdout=subprocess.PIPE, text=True
-    )
-
-    # Get quiz id from the full search line
-    quiz_id = get_quiz_id_from_search_line(picked.stdout)
-    print(f"id is {quiz_id}")
-
-    return quiz_id
 
 
 def main():
@@ -84,11 +65,10 @@ def main():
     # Load arguments from command line input
     args = parse_args()
 
-    if args.local:
-        quiz_path = args.local
+    if args.file:
+        quiz_path = args.file
 
-        quiz = None
-
+        # quiz = None
         # todo: json.JSONDEcoderError, OSError
         try:
             quiz = get_quiz_from_file(quiz_path)
@@ -104,10 +84,10 @@ def main():
     elif args.browse:
         if args.browse:
             topics = get_all_categories_from_api()
-            for topic in topics["data"]:
-                print(f"{topic["name"]} - {topic["slug"]}")
+            for topic in topics:
+                print(f"{topic["name"]}")
                 for category in topic["categories"]:
-                    print(f"\t{category["name"]} - {category["slug"]}")
+                    print(f"\t{category["name"]}")
                 # print(topic["tags"])
 
     else:
@@ -121,7 +101,7 @@ def main():
                 .lower()
             )
 
-        quiz_id = run_fzf_search(quizapi_key, search_term)
+        quiz_id = run_fzf_search_on_api(quizapi_key, search_term)
         quiz = get_quiz_from_api(quizapi_key, quiz_id)
         result = quiz.play(console)
 
