@@ -11,6 +11,8 @@ from models import Quiz
 SEARCH_LIMIT = 50
 SEARCH_SORTING_CONDITION = "popular"
 
+LOCAL_QUIZ_DIR = "local"
+
 
 class DataType(Enum):
     QUIZZES = "QUIZZES"
@@ -49,7 +51,7 @@ def get_quizzes_from_api(
     return data
 
 
-def get_quiz_from_api(api_key: str, quiz_id: str) -> Quiz:
+def get_quiz_from_api(api_key: str, quiz_id: str) -> dict:
 
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
     url = f"https://quizapi.io/api/v1/quizzes/{quiz_id}"
@@ -60,7 +62,21 @@ def get_quiz_from_api(api_key: str, quiz_id: str) -> Quiz:
     root_object = response.json()
     data = get_data_from_root_object(root_object)
 
-    return Quiz.from_dict(data)
+    return data
+
+
+def download_quiz_from_api(quiz_dict: dict) -> str:
+
+    local_dir = Path(__file__).resolve().parent / LOCAL_QUIZ_DIR
+    local_dir.mkdir(parents=True, exist_ok=True)
+
+    quiz_filename = quiz_dict.get("id", "default")
+    quiz_path = local_dir / f"{quiz_filename}.json"
+
+    with quiz_path.open("w") as file:
+        json.dump(quiz_dict, file)
+
+    return quiz_path.name
 
 
 def fuzzy_search(data: dict, data_type: DataType) -> str:

@@ -10,6 +10,7 @@ from game import play
 from models import Quiz
 from quiz_loader import (
     DataType,
+    download_quiz_from_api,
     fuzzy_search,
     get_all_topics_from_api,
     get_quiz_from_api,
@@ -47,6 +48,12 @@ def parse_args() -> argparse.Namespace:
     )
 
     parser.add_argument(
+        "--download",
+        action="store_true",
+        help="download quiz to local",
+    )
+
+    parser.add_argument(
         "--browse",
         action="store_true",
         help="browse topics, categories and choose quiz",
@@ -75,7 +82,7 @@ def run(quizapi_key: str, args: argparse.Namespace, console: Console):
             category_id = fuzzy_search(categories, DataType.CATEGORIES)
             quizzes = get_quizzes_from_api(quizapi_key, category_id=category_id)
             quiz_id = fuzzy_search(quizzes, DataType.QUIZZES)
-            quiz = get_quiz_from_api(quizapi_key, quiz_id)
+            quiz = Quiz.from_dict(get_quiz_from_api(quizapi_key, quiz_id))
             result = play(quiz, console)
 
     else:
@@ -85,8 +92,13 @@ def run(quizapi_key: str, args: argparse.Namespace, console: Console):
 
         quizzes = get_quizzes_from_api(quizapi_key, search_term=search_term)
         quiz_id = fuzzy_search(quizzes, DataType.QUIZZES)
-        quiz = get_quiz_from_api(quizapi_key, quiz_id)
-        result = play(quiz, console)
+
+        if args.download:
+            file_name = download_quiz_from_api(get_quiz_from_api(quizapi_key, quiz_id))
+            print(f"Quiz saved as {file_name}")
+        else:
+            quiz = Quiz.from_dict(get_quiz_from_api(quizapi_key, quiz_id))
+            result = play(quiz, console)
 
 
 def main():

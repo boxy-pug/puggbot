@@ -1,7 +1,6 @@
 from enum import Enum
 from random import choice
 
-from rich import console
 from rich.align import Align
 from rich.console import Console, Group
 from rich.markdown import Markdown
@@ -29,10 +28,10 @@ def get_pugg_theme() -> Theme:
         {
             "title": "bold yellow",
             "dim_title": "bold dim",
-            "correct_user_answer": "bold green",
+            "correct_user_answer": "bold black on green",
             "incorrect_user_answer": "bold black on red",
-            "correct_answer": "green dim on black",
-            "incorrect_answer": "red dim on black",
+            "correct_answer": "green",
+            "incorrect_answer": "red",
         }
     )
 
@@ -66,6 +65,7 @@ def quiz_panel(
         bottom = "Enter to continue or q to quit"
 
     if screen_type == ScreenType.RESULTS:
+        title = f"[title]{title}[/title]"
         bottom = "Thank you for playing"
 
     text = f"{title}\n\n{main}\n\n{body_text}"
@@ -116,7 +116,7 @@ def generate_results_text(
     if correct_percentage >= 100:
         return f"Wow, you got {correct_answers} of {question_count} correct answers in a {difficulty_string} quiz about {category_name}, kudos!"
     elif correct_percentage >= 80:
-        return f"Great, you got {correct_answers} of {question_count} correct answers in a {difficulty_string} quiz about {category_name}, well done!"
+        return f"Well done, you got {correct_answers} of {question_count} correct answers in a {difficulty_string} quiz about {category_name}, great job!"
     elif correct_percentage >= 60:
         return f"Good, you got {correct_answers} of {question_count} correct answers in a {difficulty_string} quiz about {category_name}, not bad!"
     elif correct_percentage >= 40:
