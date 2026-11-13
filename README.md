@@ -7,19 +7,17 @@ En quiz-app
 Python, quizapi.io
 
 ```bash
-
-usage: Puggbot [-h] [--play QUIZ] [--user USERNAME] [--show WHAT]
-               [--search SEARCHWORD]
+usage: Puggbot [-h] [--file QUIZFILE] [--browse] [SEARCHTERM]
 
 Pugg til eksamen i terminalen
 
-options:
-  -h, --help           show this help message and exit
-  --play QUIZ          play quiz, json file or api
-  --user USERNAME      provide username
-  --show WHAT          show categories, quizzes and users
-  --search SEARCHWORD  search for quizzes
+positional arguments:
+  SEARCHTERM       fuzzy search for quiz to play
 
+options:
+  -h, --help       show this help message and exit
+  --file QUIZFILE  play quiz from json file
+  --browse         browse topics, categories and choose quiz
 ```
 
 

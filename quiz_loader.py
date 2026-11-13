@@ -1,5 +1,7 @@
 import json
 import subprocess
+from collections.abc import Callable
+from enum import Enum
 from pathlib import Path
 
 import requests
@@ -10,7 +12,13 @@ SEARCH_LIMIT = 50
 SEARCH_SORTING_CONDITION = "popular"
 
 
-def get_all_categories_from_api() -> dict:
+class DataType(Enum):
+    QUIZZES = "QUIZZES"
+    CATEGORIES = "CATEGORIES"
+    TOPICS = "TOPICS"
+
+
+def get_all_topics_from_api() -> dict:
     url = "https://quizapi.io/api/v1/categories"
     headers = {"Content-Type": "application/json"}
     response = requests.get(url, headers=headers)
@@ -19,46 +27,26 @@ def get_all_categories_from_api() -> dict:
     return data
 
 
-def search_quizzes_from_api(api_key: str, search_term: str) -> dict:
+def get_quizzes_from_api(
+    api_key: str, search_term: str = "", category_id: str = ""
+) -> dict:
     url = "https://quizapi.io/api/v1/quizzes"
     params = {
-        "topic": search_term,
         "limit": SEARCH_LIMIT,
         "sort": SEARCH_SORTING_CONDITION,
     }
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
 
+    if search_term:
+        params["topic"] = search_term
+
+    if category_id:
+        params["categoryId"] = category_id
+
     response = requests.get(url, params=params, headers=headers)
     root_object = response.json()
     data = get_data_from_root_object(root_object)
     return data
-
-
-def get_quiz_id_from_search_line(search_line: str) -> str:
-    return search_line.split()[-1].strip()
-
-
-def format_quiz_search_line(quiz: dict):
-    return f'{quiz["title"]} | Difficulty: {quiz["difficulty"]} | plays: {quiz["plays"]} | qs: {quiz["questionCount"]} | {" ".join(quiz["tags"])} | {quiz["id"]}'
-
-
-def run_fzf_search_on_api(api_key: str, search_term: str) -> str:
-
-    quizzes = search_quizzes_from_api(api_key, search_term)
-    quizzes_line_formatted = "\n".join(
-        [format_quiz_search_line(quiz) for quiz in quizzes]
-    )
-
-    # Let user choose a quiz using fzf as subprocess
-    picked = subprocess.run(
-        ["fzf"], input=quizzes_line_formatted, stdout=subprocess.PIPE, text=True
-    )
-
-    # Get quiz id from the full search line
-    quiz_id = get_quiz_id_from_search_line(picked.stdout)
-    print(f"id is {quiz_id}")
-
-    return quiz_id
 
 
 def get_quiz_from_api(api_key: str, quiz_id: str) -> Quiz:
@@ -75,6 +63,51 @@ def get_quiz_from_api(api_key: str, quiz_id: str) -> Quiz:
     return Quiz.from_dict(data)
 
 
+def fuzzy_search(data: dict, data_type: DataType) -> str:
+    formatter: Callable[[dict], str]
+
+    if data_type == DataType.TOPICS:
+        formatter = format_topic_search_line
+    elif data_type == DataType.CATEGORIES:
+        formatter = format_category_search_line
+    elif data_type == DataType.QUIZZES:
+        formatter = format_quiz_search_line
+
+    formatted_lines = "\n".join([formatter(line) for line in data])
+
+    # Let user choose a quiz using fzf as subprocess
+    picked = subprocess.run(
+        ["fzf"], input=formatted_lines, stdout=subprocess.PIPE, text=True
+    )
+
+    # Get id from the full search line
+    id = get_last_value_from_search_line(picked.stdout)
+
+    return id
+
+
+def get_data_from_root_object(obj: dict) -> dict:
+    if "data" in obj:
+        return obj["data"]
+    return obj
+
+
+def get_last_value_from_search_line(search_line: str) -> str:
+    return search_line.split()[-1].strip()
+
+
+def format_topic_search_line(topic: dict) -> str:
+    return f"{topic["name"]} | {topic["id"]}"
+
+
+def format_category_search_line(category: dict) -> str:
+    return f"{category["name"]} | Quiz count: {category["quizCount"]} | Tags: {category["tags"]} | id: {category["id"]}"
+
+
+def format_quiz_search_line(quiz: dict) -> str:
+    return f'{quiz["title"]} | Difficulty: {quiz["difficulty"]} | plays: {quiz["plays"]} | qs: {quiz["questionCount"]} | {" ".join(quiz["tags"])} | {quiz["id"]}'
+
+
 def get_quiz_from_file(filepath: Path) -> Quiz:
 
     with open(filepath, "r") as file:
@@ -82,9 +115,3 @@ def get_quiz_from_file(filepath: Path) -> Quiz:
         data = get_data_from_root_object(root_object)
 
         return Quiz.from_dict(data)
-
-
-def get_data_from_root_object(obj: dict) -> dict:
-    if "data" in obj:
-        return obj["data"]
-    return obj

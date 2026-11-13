@@ -5,7 +5,13 @@ from rich.console import Console
 from rich.prompt import IntPrompt
 
 from models import Question, Quiz
-from ui import ScreenType, generate_feedback, quiz_panel, style_solution_answer
+from ui import (
+    ScreenType,
+    generate_feedback,
+    generate_results_text,
+    quiz_panel,
+    style_solution_answer,
+)
 
 
 def play(quiz: Quiz, console: Console) -> list[bool]:
@@ -55,7 +61,9 @@ def show_intro(quiz: Quiz, console: Console):
 def show_results(quiz: Quiz, answers: list[bool], console: Console):
 
     top_text = "Finished quiz"
-    main_text = f"Congratulations!"
+    main_text = generate_results_text(
+        sum(answers), quiz.questionCount, quiz.difficulty, quiz.categoryName
+    )
     body_text = [f"{sum(answers)}/{quiz.questionCount}"]
 
     console.print(
@@ -95,7 +103,6 @@ def pose(
         answer_texts.append(answer.text)
 
     top_text = f"Question {question_number}/{question_count}"
-    bottom_text = f"Choose {"/".join(answer_numbers)} and press enter"
 
     console.print(
         quiz_panel(
@@ -111,9 +118,7 @@ def pose(
     console.clear()
 
     # Feedback
-    feedback = generate_feedback(
-        user_guess in correct_answers_numbers, question.difficulty.value
-    )
+    feedback = generate_feedback(user_guess in correct_answers_numbers)
 
     solution_alternatives = []
 

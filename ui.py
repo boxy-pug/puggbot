@@ -11,15 +11,10 @@ from rich.syntax import Syntax
 from rich.table import Table
 from rich.theme import Theme
 
+from models import Difficulty
+
 PANEL_WIDTH = 70
 PANEL_PADDING = 1
-
-NUMBERING_STYLE = "[yellow bold]"
-CORRECT_USER_ANSWER = "[bold green]"
-INCORRECT_USER_ANSWER = "[bold black on red]"
-CORRECT_ANSWER = "[dim green]"
-INCORRECT_ANSWER = "[dim red]"
-CLEAR_STYLE = "[/]"
 
 
 class ScreenType(Enum):
@@ -36,8 +31,8 @@ def get_pugg_theme() -> Theme:
             "dim_title": "bold dim",
             "correct_user_answer": "bold green",
             "incorrect_user_answer": "bold black on red",
-            "correct_answer": "green dim",
-            "incorrect_answer": "red dim",
+            "correct_answer": "green dim on black",
+            "incorrect_answer": "red dim on black",
         }
     )
 
@@ -86,7 +81,7 @@ def quiz_panel(
     return Align(panel, vertical="middle")
 
 
-def generate_feedback(is_correct: bool, difficulty: str) -> str:
+def generate_feedback(is_correct: bool) -> str:
     correct_feedback = [
         "Yes, exactly!",
         "Correct!",
@@ -105,6 +100,33 @@ def generate_feedback(is_correct: bool, difficulty: str) -> str:
         return f"[red bold]{choice(wrong_feedback)}[/]"
 
 
+def generate_results_text(
+    correct_answers: int,
+    question_count: int,
+    difficulty: Difficulty,
+    category_name: str,
+) -> str:
+    correct_percentage = (correct_answers / question_count) * 100
+    difficulty_string = (
+        f"{difficulty.value.lower()} difficulty"
+        if difficulty == Difficulty.MEDIUM
+        else difficulty.value.lower()
+    )
+
+    if correct_percentage >= 100:
+        return f"Wow, you got {correct_answers} of {question_count} correct answers in a {difficulty_string} quiz about {category_name}, kudos!"
+    elif correct_percentage >= 80:
+        return f"Great, you got {correct_answers} of {question_count} correct answers in a {difficulty_string} quiz about {category_name}, well done!"
+    elif correct_percentage >= 60:
+        return f"Good, you got {correct_answers} of {question_count} correct answers in a {difficulty_string} quiz about {category_name}, not bad!"
+    elif correct_percentage >= 40:
+        return f"Ok, you got {correct_answers} of {question_count} correct answers in a {difficulty_string} quiz about {category_name}, I have seen worse."
+    elif correct_percentage >= 20:
+        return f"Well, you got {correct_answers} of {question_count} correct answers in a {difficulty_string} quiz about {category_name}, it could be worse I guess."
+    else:
+        return f"Ouch, you got {correct_answers} of {question_count} correct answers in a {difficulty_string} quiz about {category_name}, that's a bit embarassing actually."
+
+
 def style_solution_answer(answer: str, is_correct: bool, is_user_answer: bool) -> str:
     if is_user_answer:
         if is_correct:
@@ -113,6 +135,6 @@ def style_solution_answer(answer: str, is_correct: bool, is_user_answer: bool) -
             return "[incorrect_user_answer]" + answer + "[/incorrect_user_answer]"
     else:
         if is_correct:
-            return CORRECT_ANSWER + answer + CLEAR_STYLE
+            return "[correct_answer]" + answer + "[/correct_answer]"
         else:
-            return INCORRECT_ANSWER + answer + CLEAR_STYLE
+            return "[incorrect_answer]" + answer + "[/incorrect_answer]"
