@@ -13,6 +13,11 @@ SEARCH_SORTING_CONDITION = "popular"
 
 LOCAL_QUIZ_DIR = "local"
 
+RED = "\033[31m"
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+RESET = "\033[0m"
+
 
 class DataType(Enum):
     QUIZZES = "QUIZZES"
@@ -93,7 +98,10 @@ def fuzzy_search(data: dict, data_type: DataType) -> str:
 
     # Let user choose a quiz using fzf as subprocess
     picked = subprocess.run(
-        ["fzf"], input=formatted_lines, stdout=subprocess.PIPE, text=True
+        ["fzf", "--exact", "--ansi"],
+        input=formatted_lines,
+        stdout=subprocess.PIPE,
+        text=True,
     )
 
     # Get id from the full search line
@@ -113,15 +121,15 @@ def get_last_value_from_search_line(search_line: str) -> str:
 
 
 def format_topic_search_line(topic: dict) -> str:
-    return f"{topic["name"]} | {topic["id"]}"
+    return f"{YELLOW}{topic["name"]}{RESET} | {topic["id"]}"
 
 
 def format_category_search_line(category: dict) -> str:
-    return f"{category["name"]} | Quiz count: {category["quizCount"]} | Tags: {category["tags"]} | id: {category["id"]}"
+    return f"{YELLOW}{category["name"]}{RESET} | qs: {category["quizCount"]} | {" ".join(category["tags"])} | id: {category["id"]}"
 
 
 def format_quiz_search_line(quiz: dict) -> str:
-    return f'{quiz["title"]} | Difficulty: {quiz["difficulty"]} | plays: {quiz["plays"]} | qs: {quiz["questionCount"]} | {" ".join(quiz["tags"])} | {quiz["id"]}'
+    return f'{YELLOW}{quiz["title"]}{RESET} | {quiz["difficulty"]} | ps: {quiz["plays"]} qs: {quiz["questionCount"]} | {" ".join(quiz["tags"])} | {quiz["id"]}'
 
 
 def get_quiz_from_file(filepath: Path) -> Quiz:

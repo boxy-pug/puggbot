@@ -62,7 +62,7 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def run(quizapi_key: str, args: argparse.Namespace, console: Console):
+def run(args: argparse.Namespace, console: Console):
     if args.file:
         quiz_path = args.file
         quiz = get_quiz_from_file(quiz_path)
@@ -80,6 +80,8 @@ def run(quizapi_key: str, args: argparse.Namespace, console: Console):
             )
 
             category_id = fuzzy_search(categories, DataType.CATEGORIES)
+
+            quizapi_key = load_quizapi_key_from_env()
             quizzes = get_quizzes_from_api(quizapi_key, category_id=category_id)
             quiz_id = fuzzy_search(quizzes, DataType.QUIZZES)
             quiz = Quiz.from_dict(get_quiz_from_api(quizapi_key, quiz_id))
@@ -90,6 +92,7 @@ def run(quizapi_key: str, args: argparse.Namespace, console: Console):
         if not search_term:
             search_term = get_user_search_term()
 
+        quizapi_key = load_quizapi_key_from_env()
         quizzes = get_quizzes_from_api(quizapi_key, search_term=search_term)
         quiz_id = fuzzy_search(quizzes, DataType.QUIZZES)
 
@@ -101,25 +104,28 @@ def run(quizapi_key: str, args: argparse.Namespace, console: Console):
             result = play(quiz, console)
 
 
+def load_quizapi_key_from_env() -> str:
+    # Get QuizAPI API key from .env, exit program if not found.
+    load_dotenv()
+    quizapi_key = os.getenv("QUIZAPI_KEY", default=None)
+
+    if not quizapi_key:
+        raise RuntimeError("Please provide a 'QUIZAPI_KEY' in .env")
+
+    return quizapi_key
+
+
 def main():
 
     # start console and stderr
     console = Console(theme=get_pugg_theme())
     err_console = Console(stderr=True)
 
-    # Get QuizAPI API key from .env, exit program if not found.
-    load_dotenv()
-    quizapi_key = os.getenv("QUIZAPI_KEY", default=None)
-
-    if quizapi_key is None:
-        err_console.print("Please provide a 'QUIZAPI_KEY' in .env")
-        sys.exit(1)
-
     # Load arguments from command line input
     args = parse_args()
 
     try:
-        run(quizapi_key, args, console)
+        run(args, console)
     except Exception as exc:
         err_console.print(f"Error trying to play pugg: {exc}")
         return 1
